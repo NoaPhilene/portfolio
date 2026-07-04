@@ -1,0 +1,48 @@
+.magazine-mobile * {
+  box-sizing: border-box;
+}
+
+/* Names kept as literally tested in the Claude Design prototype: forward
+   turns hinge from the right edge using the `turnPrev` curve, backward
+   turns hinge from the left edge using `turnBack` — the labels don't match
+   their direction 1:1, but swapping them broke the "turn like a real
+   magazine" feel the design session settled on. */
+@keyframes turnNext {
+  0% {
+    transform: rotateY(-114deg);
+    opacity: 0;
+  }
+  55% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotateY(0deg);
+    opacity: 1;
+  }
+}
+@keyframes turnPrev {
+  0% {
+    transform: rotateY(114deg);
+    opacity: 0;
+  }
+  55% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotateY(0deg);
+    opacity: 1;
+  }
+}
+@keyframes turnBack {
+  0% {
+    transform: rotateY(-114deg);
+    opacity: 0;
+  }
+  55% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotateY(0deg);
+    opacity: 1;
+  }
+}

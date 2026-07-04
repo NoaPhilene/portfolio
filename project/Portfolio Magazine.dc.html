@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=Archivo:wght@400;500;600;700&amp;family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;height:100%;overflow:hidden;background:#c8c4bc;}
+@keyframes spreadSlide{from{transform:translateX(42px);}to{transform:translateX(0);}}
+@keyframes spreadFade{from{transform:scale(.985);}to{transform:none;}}
+@keyframes leafNext{0%{transform:rotateY(0deg);}100%{transform:rotateY(-179deg);}}
+@keyframes leafPrev{0%{transform:rotateY(0deg);}100%{transform:rotateY(179deg);}}
+@keyframes leafShadeR{0%{opacity:0;}50%{opacity:.6;}100%{opacity:0;}}
+@keyframes leafShadeL{0%{opacity:0;}50%{opacity:.6;}100%{opacity:0;}}
+@keyframes leafGloss{0%{opacity:0;background-position:-40% 0;}22%{opacity:.55;}72%{opacity:.55;}100%{opacity:0;background-position:140% 0;}}
+@keyframes leafLift{0%{box-shadow:0 8px 20px rgba(6,14,24,.18);}50%{box-shadow:0 40px 90px rgba(6,14,24,.5);}100%{box-shadow:0 8px 20px rgba(6,14,24,.18);}}
+</style>
+</helmet>
+
+<div style="position:fixed;inset:0;overflow:hidden;background:radial-gradient(circle at 50% 38%, #d8d5cf 0%, #bcb8b0 100%);font-family:'Archivo',sans-serif;">
+
+  <div style="position:fixed;top:0;left:0;right:0;height:46px;display:flex;align-items:center;justify-content:center;font-family:'Archivo',sans-serif;font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:#7c7468;z-index:50;">Noa Philène van Mil — Portfolio Magazine · Vol. 01</div>
+
+  <!-- language toggle -->
+  <div style="position:fixed;top:12px;right:24px;z-index:70;display:flex;gap:4px;background:#fff;border-radius:30px;padding:4px;box-shadow:0 6px 18px rgba(0,0,0,.14);">
+    <button onClick="{{ setEn }}" style="{{ enStyle }}">EN</button>
+    <button onClick="{{ setNl }}" style="{{ nlStyle }}">NL</button>
+  </div>
+
+  <div ref="{{ magRef }}" style="position:absolute;left:50%;top:50%;width:1320px;height:880px;transform:translate(-50%,-50%);transform-origin:center center;--spread-anim:none;">
+
+    <div style="position:absolute;inset:0;transform:translate(11px,13px);background:#e3dccd;border-radius:2px;box-shadow:0 34px 76px rgba(15,25,40,.42);z-index:0;"></div>
+    <div style="position:absolute;inset:0;transform:translate(5px,6px);background:#eee7d9;border-radius:2px;z-index:1;"></div>
+
+    <div style="position:absolute;inset:0;z-index:2;overflow:hidden;border-radius:2px;box-shadow:0 30px 70px rgba(15,25,40,.4);perspective:2600px;">
+
+      <!-- ===== SPREAD 0 · COVER ===== -->
+      <sc-if value="{{ show0 }}" hint-placeholder-val="{{ true }}">
+        <div data-spr="0" style="position:absolute;inset:0;display:flex;animation:var(--spread-anim, spreadSlide) .5s ease;">
+          <div style="width:660px;height:880px;background:#1f3c5c url('data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27660%27%20height%3D%27880%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M0%20722C175%20648%20352%20796%20527%20708%20616%20663%20660%20692%20660%20692V880H0Z%27%20fill%3D%27%232c5580%27%20opacity%3D%27.5%27%2F%3E%3Cpath%20d%3D%27M0%20754C175%20688%20357%20808%20530%20732%20618%20694%20660%20722%20660%20722V880H0Z%27%20fill%3D%27%2316304a%27%2F%3E%3C%2Fsvg%3E') no-repeat center / cover;position:relative;overflow:hidden;padding:62px 56px;display:flex;flex-direction:column;justify-content:center;gap:54px;">
+            <div style="line-height:.82;">
+              <div style="font-family: 'Archivo Black',sans-serif; color: #f1ebdf; font-size: 90px; letter-spacing: .02em; position: relative">PORT</div><div style="font-family: 'Archivo Black',sans-serif; color: transparent; -webkit-text-stroke: 1.5px #c7ab7d; font-size: 70px; letter-spacing: .02em">FOLIO</div>
+              
+            </div><div>
+              <div style="font-family:'Archivo Black',sans-serif;color:#f1ebdf;font-size:96px;line-height:.86;letter-spacing:-.02em;">NOA</div>
+              <div style="font-family:'Archivo Black',sans-serif;font-size:96px;line-height:.92;letter-spacing:-.02em;color:transparent;-webkit-text-stroke:2px #c7ab7d;">PHILÈNE</div>
+              <div style="font-family:'Archivo Black',sans-serif;color:#f1ebdf;font-size:96px;line-height:.92;letter-spacing:-.02em;">VAN MIL</div>
+              <div style="margin-top:28px;display:flex;align-items:center;gap:14px;">
+                <span style="width:30px;height:2px;background:#c7ab7d;display:inline-block;"></span>
+                <span style="font-family:'Archivo',sans-serif;color:#ece5d6;font-size:15px;letter-spacing:.05em;">{{ t.cvName }}</span>
+              </div>
+            </div>
+            <div style="position:absolute;bottom:22px;left:48px;font-family:'Archivo',sans-serif;font-size:12px;letter-spacing:.22em;color:#c7ab7d;z-index:5;">— 01</div>
+          </div>
+          <div style="width:660px;height:880px;background:#16304a url('data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27660%27%20height%3D%27880%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M0%20722C175%20648%20352%20796%20527%20708%20616%20663%20660%20692%20660%20692V880H0Z%27%20fill%3D%27%2324486c%27%20opacity%3D%27.5%27%2F%3E%3Cpath%20d%3D%27M0%20754C175%20688%20357%20808%20530%20732%20618%20694%20660%20722%20660%20722V880H0Z%27%20fill%3D%27%230f2236%27%2F%3E%3C%2Fsvg%3E') no-repeat center / cover;position:relative;overflow:hidden;">
+            <svg viewBox="0 0 660 320" preserveAspectRatio="none" style="position:absolute;left:0;bottom:0;width:100%;height:320px;">
+              <path d="M0,170 C150,90 330,250 510,160 C600,118 660,150 660,150 L660,320 L0,320 Z" fill="#17314a"></path>
+              <path d="M0,215 C150,150 350,270 520,200 C610,165 660,200 660,200 L660,320 L0,320 Z" fill="#1d3a57" opacity=".75"></path>
+            </svg>
+            <div style="position:absolute;top:70px;right:44px;font-family:'Archivo Black',sans-serif;font-size:116px;line-height:.8;color:transparent;-webkit-text-stroke:1.5px rgba(236,229,214,.26);writing-mode:vertical-rl;letter-spacing:-.03em;">2026</div>
+            <div style="position:absolute;top:98px;left:66px;width:300px;height:300px;">
+              <image-slot id="cover-photo" shape="circle" placeholder="Jouw foto" style="width:300px;height:300px;display:block;border-radius:50%;box-shadow:0 16px 40px rgba(0,0,0,.4);"></image-slot>
+              <div style="position:absolute;inset:-11px;border:1px solid rgba(199,171,125,.5);border-radius:50%;pointer-events:none;"></div>
+            </div>
+            <div style="position:absolute;left:66px;bottom:148px;">
+              <div style="font-family:'Archivo Black',sans-serif;color:#c7ab7d;font-size:46px;line-height:.96;">WEB</div>
+              <div style="font-family:'Archivo Black',sans-serif;color:#f1ebdf;font-size:46px;line-height:.96;">{{ t.cvRole2 }}</div>
+            </div>
+            <div style="position:absolute;left:66px;bottom:74px;font-family:'Archivo',sans-serif;color:#ece5d6;font-size:14px;letter-spacing:.22em;text-transform:uppercase;">noaphilene.dev</div>
+            <div style="position:absolute;bottom:22px;right:48px;font-family:'Archivo',sans-serif;font-size:12px;letter-spacing:.22em;color:#c7ab7d;z-index:5;">02 —</div>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- ===== SPREAD 1 · CONTENTS ===== -->
+      <sc-if value="{{ show1 }}" hint-placeholder-val="{{ true }}">
+        <div data-spr="1" style="position:absolute;inset:0;display:flex;animation:var(--spread-anim, spreadSlide) .5s ease;">
+          <div style="width:660px;height:880px;background:#eef1f5 url('data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27660%27%20height%3D%27880%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M0%20745C175%20675%20355%20808%20528%20728%20616%20688%20660%20715%20660%20715V880H0Z%27%20fill%3D%27%23d8dfea%27%2F%3E%3Cpath%20d%3D%27M0%20780C175%20720%20360%20822%20532%20758%20620%20723%20660%20748%20660%20748V880H0Z%27%20fill%3D%27%23cad4e3%27%2F%3E%3C%2Fsvg%3E') no-repeat center / cover;position:relative;overflow:hidden;padding:62px 56px;display:flex;flex-direction:column;">
+            <div style="font-family:'Archivo',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;font-weight:600;color:#8a7f6a;">{{ t.ctKicker }}</div>
+            <div style="margin-top:30px;">
+              <div style="font-family:'Archivo Black',sans-serif;font-size:116px;line-height:.82;color:#1f1d1a;">{{ t.ctBig1 }}</div>
+              <div style="font-family:'Archivo Black',sans-serif;font-size:116px;line-height:.92;color:transparent;-webkit-text-stroke:2px #1f1d1a;">{{ t.ctBig2 }}</div>
+            </div>
+            <div style="margin-top:30px;font-family:'Spectral',serif;font-size:16px;line-height:1.65;color:#544e43;max-width:430px;">{{ t.ctIntro }}</div>
+            <div style="margin-top:auto;width:100%;height:200px;">
+              <image-slot id="contents-photo" shape="rounded" radius="2" placeholder="Sfeerbeeld" style="width:100%;height:200px;display:block;"></image-slot>
+            </div>
+            <div style="position:absolute;bottom:22px;left:48px;font-family:'Archivo',sans-serif;font-size:12px;letter-spacing:.22em;color:#8a7f6a;z-index:5;">— 03</div>
+          </div>
+          <div style="width:660px;height:880px;background:#eef1f5 url('data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27660%27%20height%3D%27880%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M0%20745C175%20675%20355%20808%20528%20728%20616%20688%20660%20715%20660%20715V880H0Z%27%20fill%3D%27%23d8dfea%27%2F%3E%3Cpath%20d%3D%27M0%20780C175%20720%20360%20822%20532%20758%20620%20723%20660%20748%20660%20748V880H0Z%27%20fill%3D%27%23cad4e3%27%2F%3E%3C%2Fsvg%3E') no-repeat center / cover;position:relative;overflow:hidden;padding:62px 56px;display:flex;flex-direction:column;">
+            <div style="font-family:'Archivo',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;font-weight:600;color:#8a7f6a;margin-bottom:6px;">{{ t.ctPages }}</div>
+            <div onClick="{{ go2 }}" style="display:flex;gap:22px;align-items:flex-start;padding:24px 14px;margin:0 -14px;border-top:1px solid rgba(31,29,26,.16);cursor:pointer;border-radius:3px;" style-hover="background:rgba(199,171,125,.16);">
+              <div style="font-family:'Archivo Black',sans-serif;font-size:44px;line-height:.9;color:#c7ab7d;min-width:72px;">01</div>
+              <div style="flex:1;"><div style="font-family:'Archivo Black',sans-serif;font-size:22px;color:#1f1d1a;">{{ t.i1t }}</div><div style="font-family:'Spectral',serif;font-size:14px;line-height:1.5;color:#6b6457;margin-top:4px;">{{ t.i1d }}</div></div>
+              <div style="font-family:'Archivo',sans-serif;font-size:13px;color:#8a7f6a;align-self:center;">→</div>
+            </div>
+            <div onClick="{{ go3 }}" style="display:flex;gap:22px;align-items:flex-start;padding:24px 14px;margin:0 -14px;border-top:1px solid rgba(31,29,26,.16);cursor:pointer;border-radius:3px;" style-hover="background:rgba(199,171,125,.16);">
+              <div style="font-family:'Archivo Black',sans-serif;font-size:44px;line-height:.9;color:#c7ab7d;min-width:72px;">02</div>
+              <div style="flex:1;"><div style="font-family:'Archivo Black',sans-serif;font-size:22px;color:#1f1d1a;">{{ t.i2t }}</div><div style="font-family:'Spectral',serif;font-size:14px;line-height:1.5;color:#6b6457;margin-top:4px;">{{ t.i2d }}</div></div>
+              <div style="font-family:'Archivo',sans-serif;font-size:13px;color:#8a7f6a;align-self:center;">→</div>
+            </div>
+            <div onClick="{{ go4 }}" style="display:flex;gap:22px;align-items:flex-start;padding:24px 14px;margin:0 -14px;border-top:1px solid rgba(31,29,26,.16);cursor:pointer;border-radius:3px;" style-hover="background:rgba(199,171,125,.16);">
+              <div style="font-family:'Archivo Black',sans-serif;font-size:44px;line-height:.9;color:#c7ab7d;min-width:72px;">03</div>
+              <div style="flex:1;"><div style="font-family:'Archivo Black',sans-serif;font-size:22px;color:#1f1d1a;">{{ t.i3t }}</div><div style="font-family:'Spectral',serif;font-size:14px;line-height:1.5;color:#6b6457;margin-top:4px;">{{ t.i3d }}</div></div>
+              <div style="font-family:'Archivo',sans-serif;font-size:13px;color:#8a7f6a;align-self:center;">→</div>
+            </div>
+            <div onClick="{{ go5 }}" style="display:flex;gap:22px;align-items:flex-start;padding:24px 14px;margin:0 -14px;border-top:1px solid rgba(31,29,26,.16);border-bottom:1px solid rgba(31,29,26,.16);cursor:pointer;border-radius:3px;" style-hover="background:rgba(199,171,125,.16);">
+              <div style="font-family:'Archivo Black',sans-serif;font-size:44px;line-height:.9;color:#c7ab7d;min-width:72px;">04</div>
+              <div style="flex:1;"><div style="font-family:'Archivo Black',sans-serif;font-size:22px;color:#1f1d1a;">{{ t.i5t }}</div><div style="font-family:'Spectral',serif;font-size:14px;line-height:1.5;color:#6b6457;margin-top:4px;">{{ t.i5d }}</div></div>
+              <div style="font-family:'Archivo',sans-serif;font-size:13px;color:#8a7f6a;align-self:center;">→</div>
+            </div>
+            <div style="position:absolute;bottom:22px;right:48px;font-family:'Archivo',sans-serif;font-size:12px;letter-spacing:.22em;color:#8a7f6a;z-index:5;">04 —</div>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- ===== SPREAD 2 · ABOUT ===== -->
+      <sc-if value="{{ show2 }}" hint-placeholder-val="{{ true }}">
+        <div data-spr="2" style="position:absolute;inset:0;display:flex;animation:var(--spread-anim, spreadSlide) .5s ease;">
+          <div style="width:660px;height:880px;background:#1f3c5c url('data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27660%27%20height%3D%27880%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M0%20722C175%20648%20352%20796%20527%20708%20616%20663%20660%20692%20660%20692V880H0Z%27%20fill%3D%27%232c5580%27%20opacity%3D%27.5%27%2F%3E%3Cpath%20d%3D%27M0%20754C175%20688%20357%20808%20530%20732%20618%20694%20660%20722%20660%20722V880H0Z%27%20fill%3D%27%2316304a%27%2F%3E%3C%2Fsvg%3E') no-repeat center / cover;position:relative;overflow:hidden;padding:62px 56px;display:flex;flex-direction:column;justify-content:space-between;">
+            <div style="font-family:'Archivo',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;font-weight:600;color:#c7ab7d;">{{ t.abKicker }}</div>
+            <div>
+              <div style="font-family:'Archivo Black',sans-serif;font-size:66px;line-height:.86;color:#f1ebdf;">{{ t.abBig1 }}</div>
+              <div style="font-family:'Archivo Black',sans-serif;font-size:66px;line-height:.94;color:transparent;-webkit-text-stroke:2px #c7ab7d;">{{ t.abBig2 }}</div>
+            </div>
+            <div style="font-family:'Spectral',serif;font-size:19px;line-height:1.6;color:#ece5d6;max-width:500px;text-wrap:pretty;">{{ t.abBio }}</div>
+            <div style="display:flex;align-items:center;gap:14px;"><span style="width:30px;height:2px;background:#c7ab7d;display:inline-block;"></span><span style="font-family:'Spectral',serif;font-style:italic;color:#c7ab7d;font-size:20px;">Noa Philène</span></div>
+            <div style="position:absolute;bottom:22px;left:48px;font-family:'Archivo',sans-serif;font-size:12px;letter-spacing:.22em;color:#c7ab7d;z-index:5;">— 05</div>
+          </div>
+          <div style="width:660px;height:880px;background:#eef1f5 url('data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27660%27%20height%3D%27880%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M0%20745C175%20675%20355%20808%20528%20728%20616%20688%20660%20715%20660%20715V880H0Z%27%20fill%3D%27%23d8dfea%27%2F%3E%3Cpath%20d%3D%27M0%20780C175%20720%20360%20822%20532%20758%20620%20723%20660%20748%20660%20748V880H0Z%27%20fill%3D%27%23cad4e3%27%2F%3E%3C%2Fsvg%3E') no-repeat center / cover;position:relative;overflow:hidden;padding:62px 56px;display:flex;flex-direction:column;">
+            <image-slot id="about-photo" shape="rounded" radius="2" placeholder="Portretfoto" style="width:100%;height:430px;display:block;"></image-slot>
+            <div style="margin-top:26px;font-family:'Archivo',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;font-weight:600;color:#8a7f6a;">{{ t.abAbout }}</div>
+            <div style="margin-top:auto;">
+              <div style="display:flex;justify-content:space-between;align-items:baseline;padding:18px 0;border-top:1px solid rgba(31,29,26,.16);"><span style="font-family:'Archivo',sans-serif;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#8a7f6a;">{{ t.abL1 }}</span><span style="font-family:'Archivo Black',sans-serif;font-size:20px;color:#1f1d1a;">Gorinchem<br></span></div>
+              <div style="display:flex;justify-content:space-between;align-items:baseline;padding:18px 0;border-top:1px solid rgba(31,29,26,.16);"><span style="font-family:'Archivo',sans-serif;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#8a7f6a;">{{ t.abL2 }}</span><span style="font-family:'Archivo Black',sans-serif;font-size:20px;color:#1f1d1a;">Front-end &amp; back-end</span></div>
+              <div style="display:flex;justify-content:space-between;align-items:baseline;padding:18px 0;border-top:1px solid rgba(31,29,26,.16);border-bottom:1px solid rgba(31,29,26,.16);"><span style="font-family:'Archivo',sans-serif;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#8a7f6a;">{{ t.abL3 }}</span><span style="font-family:'Archivo Black',sans-serif;font-size:20px;color:#1f1d1a;">2024</span></div>
+            </div>
+            <div style="position:absolute;bottom:22px;right:48px;font-family:'Archivo',sans-serif;font-size:12px;letter-spacing:.22em;color:#8a7f6a;z-index:5;">06 —</div>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- ===== SPREAD 3 · SKILLS & PROCESS ===== -->
+      <sc-if value="{{ show3 }}" hint-placeholder-val="{{ true }}">
+        <div data-spr="3" style="position:absolute;inset:0;display:flex;animation:var(--spread-anim, spreadSlide) .5s ease;">
+          <div style="width:660px;height:880px;background:#eef1f5 url('data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27660%27%20height%3D%27880%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M0%20745C175%20675%20355%20808%20528%20728%20616%20688%20660%20715%20660%20715V880H0Z%27%20fill%3D%27%23d8dfea%27%2F%3E%3Cpath%20d%3D%27M0%20780C175%20720%20360%20822%20532%20758%20620%20723%20660%20748%20660%20748V880H0Z%27%20fill%3D%27%23cad4e3%27%2F%3E%3C%2Fsvg%3E') no-repeat center / cover;position:relative;overflow:hidden;padding:62px 56px;display:flex;flex-direction:column;">
+            <div style="font-family:'Archivo',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;font-weight:600;color:#8a7f6a;">{{ t.skKicker }}</div>
+            <div style="margin-top:24px;font-family:'Archivo Black',sans-serif;font-size:76px;line-height:.86;color:#1f1d1a;">TOOLS &amp;<br>STACK</div>
+            <div style="margin-top:48px;display:flex;gap:26px;">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:12px;"><div style="width:94px;height:94px;border-radius:50%;border:1.5px solid #c7ab7d;display:flex;align-items:center;justify-content:center;font-family:'Archivo Black',sans-serif;font-size:25px;color:#1f1d1a;background:#fff;">JS</div><div style="font-family:'Archivo',sans-serif;font-size:12px;color:#6b6457;">JavaScript</div></div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:12px;"><div style="width:94px;height:94px;border-radius:50%;border:1.5px solid #c7ab7d;display:flex;align-items:center;justify-content:center;font-family:'Archivo Black',sans-serif;font-size:25px;color:#1f1d1a;background:#fff;">TS</div><div style="font-family:'Archivo',sans-serif;font-size:12px;color:#6b6457;">TypeScript</div></div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:12px;"><div style="width:94px;height:94px;border-radius:50%;border:1.5px solid #c7ab7d;display:flex;align-items:center;justify-content:center;font-family:'Archivo Black',sans-serif;font-size:25px;color:#1f1d1a;background:#fff;">Re</div><div style="font-family:'Archivo',sans-serif;font-size:12px;color:#6b6457;">React</div></div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:12px;"><div style="width:94px;height:94px;border-radius:50%;border:1.5px solid #c7ab7d;display:flex;align-items:center;justify-content:center;font-family:'Archivo Black',sans-serif;font-size:25px;color:#1f1d1a;background:#fff;">P5</div><div style="font-family:'Archivo',sans-serif;font-size:12px;color:#6b6457;">{{ t.skAnim }}</div></div>
+            </div>
+            <div style="margin-top:auto;">
+              <div style="font-family:'Archivo',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;font-weight:600;color:#8a7f6a;margin-bottom:16px;">{{ t.skSpec }}</div>
+              <div style="display:flex;flex-wrap:wrap;gap:10px;">
+                <span style="padding:10px 20px;border:1px solid rgba(31,29,26,.28);border-radius:40px;font-family:'Archivo',sans-serif;font-size:14px;color:#1f1d1a;">React</span>
+                <span style="padding:10px 20px;border:1px solid rgba(31,29,26,.28);border-radius:40px;font-family:'Archivo',sans-serif;font-size:14px;color:#1f1d1a;">Next.js</span>
+                <span style="padding:10px 20px;border:1px solid rgba(31,29,26,.28);border-radius:40px;font-family:'Archivo',sans-serif;font-size:14px;color:#1f1d1a;">TypeScript</span>
+                <span style="padding:10px 20px;border:1px solid rgba(31,29,26,.28);border-radius:40px;font-family:'Archivo',sans-serif;font-size:14px;color:#1f1d1a;">Tailwind CSS</span>
+                <span style="padding:10px 20px;border:1px solid rgba(31,29,26,.28);border-radius:40px;font-family:'Archivo',sans-serif;font-size:14px;color:#1f1d1a;">Node.js</span>
+                <span style="padding:10px 20px;border:1px solid rgba(31,29,26,.28);border-radius:40px;font-family:'Archivo',sans-serif;font-size:14px;color:#1f1d1a;">HTML</span>
+                <span style="padding:10px 20px;border:1px solid rgba(31,29,26,.28);border-radius:40px;font-family:'Archivo',sans-serif;font-size:14px;color:#1f1d1a;">CSS</span>
+                <span style="padding:10px 20px;border:1px solid rgba(31,29,26,.28);border-radius:40px;font-family:'Archivo',sans-serif;font-size:14px;color:#1f1d1a;">SCSS</span>
+                <span style="padding:10px 20px;border:1px solid rgba(31,29,26,.28);border-radius:40px;font-family:'Archivo',sans-serif;font-size:14px;color:#1f1d1a;">SQL</span>
+                <span style="padding:10px 20px;border:1px solid rgba(31,29,26,.28);border-radius:40px;font-family:'Archivo',sans-serif;font-size:14px;color:#1f1d1a;">PHP</span>
+                <span style="padding:10px 20px;border:1px solid rgba(31,29,26,.28);border-radius:40px;font-family:'Archivo',sans-serif;font-size:14px;color:#1f1d1a;">p5.js</span>
+              </div>
+            </div>
+            <div style="position:absolute;bottom:22px;left:48px;font-family:'Archivo',sans-serif;font-size:12px;letter-spacing:.22em;color:#8a7f6a;z-index:5;">— 07</div>
+          </div>
+          <div style="width:660px;height:880px;background:#1f3c5c url('data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27660%27%20height%3D%27880%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M0%20722C175%20648%20352%20796%20527%20708%20616%20663%20660%20692%20660%20692V880H0Z%27%20fill%3D%27%232c5580%27%20opacity%3D%27.5%27%2F%3E%3Cpath%20d%3D%27M0%20754C175%20688%20357%20808%20530%20732%20618%20694%20660%20722%20660%20722V880H0Z%27%20fill%3D%27%2316304a%27%2F%3E%3C%2Fsvg%3E') no-repeat center / cover;position:relative;overflow:hidden;padding:62px 56px;display:flex;flex-direction:column;">
+            <div style="position:absolute;top:54px;right:48px;font-family:'Archivo Black',sans-serif;font-size:230px;line-height:.7;color:transparent;-webkit-text-stroke:1.5px rgba(199,171,125,.16);pointer-events:none;">04</div>
+            <div style="font-family:'Archivo',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;font-weight:600;color:#c7ab7d;position:relative;z-index:2;">{{ t.skProcess }}</div>
+            <div style="margin-top:22px;font-family:'Archivo Black',sans-serif;font-size:68px;line-height:.88;color:#f1ebdf;position:relative;z-index:2;">{{ t.skPw1 }}<br><span style="color:transparent;-webkit-text-stroke:2px #c7ab7d;">{{ t.skPw2 }}</span></div>
+            <div style="margin-top:54px;position:relative;z-index:2;">
+              <div style="position:absolute;left:27px;top:14px;bottom:14px;width:2px;background:linear-gradient(#c7ab7d, rgba(199,171,125,.25));"></div>
+              <div style="display:flex;gap:28px;align-items:flex-start;padding-bottom:34px;">
+                <div style="flex:none;width:56px;height:56px;border-radius:50%;background:#c7ab7d;display:flex;align-items:center;justify-content:center;font-family:'Archivo Black',sans-serif;font-size:22px;color:#16304a;box-shadow:0 0 0 7px #1f3c5c;">01</div>
+                <div style="padding-top:6px;"><div style="font-family:'Archivo Black',sans-serif;font-size:22px;color:#f1ebdf;">{{ t.st1t }}</div><div style="font-family:'Spectral',serif;font-size:15px;line-height:1.55;color:rgba(236,229,214,.82);margin-top:4px;max-width:400px;">{{ t.st1d }}</div></div>
+              </div>
+              <div style="display:flex;gap:28px;align-items:flex-start;padding-bottom:34px;">
+                <div style="flex:none;width:56px;height:56px;border-radius:50%;border:2px solid #c7ab7d;background:#1f3c5c;display:flex;align-items:center;justify-content:center;font-family:'Archivo Black',sans-serif;font-size:22px;color:#c7ab7d;box-shadow:0 0 0 7px #1f3c5c;">02</div>
+                <div style="padding-top:6px;"><div style="font-family:'Archivo Black',sans-serif;font-size:22px;color:#f1ebdf;">{{ t.st2t }}</div><div style="font-family:'Spectral',serif;font-size:15px;line-height:1.55;color:rgba(236,229,214,.82);margin-top:4px;max-width:400px;">{{ t.st2d }}</div></div>
+              </div>
+              <div style="display:flex;gap:28px;align-items:flex-start;padding-bottom:34px;">
+                <div style="flex:none;width:56px;height:56px;border-radius:50%;border:2px solid #c7ab7d;background:#1f3c5c;display:flex;align-items:center;justify-content:center;font-family:'Archivo Black',sans-serif;font-size:22px;color:#c7ab7d;box-shadow:0 0 0 7px #1f3c5c;">03</div>
+                <div style="padding-top:6px;"><div style="font-family:'Archivo Black',sans-serif;font-size:22px;color:#f1ebdf;">{{ t.st3t }}</div><div style="font-family:'Spectral',serif;font-size:15px;line-height:1.55;color:rgba(236,229,214,.82);margin-top:4px;max-width:400px;">{{ t.st3d }}</div></div>
+              </div>
+              <div style="display:flex;gap:28px;align-items:flex-start;">
+                <div style="flex:none;width:56px;height:56px;border-radius:50%;border:2px solid #c7ab7d;background:#1f3c5c;display:flex;align-items:center;justify-content:center;font-family:'Archivo Black',sans-serif;font-size:22px;color:#c7ab7d;box-shadow:0 0 0 7px #1f3c5c;">04</div>
+                <div style="padding-top:6px;"><div style="font-family:'Archivo Black',sans-serif;font-size:22px;color:#f1ebdf;">{{ t.st4t }}</div><div style="font-family:'Spectral',serif;font-size:15px;line-height:1.55;color:rgba(236,229,214,.82);margin-top:4px;max-width:400px;">{{ t.st4d }}</div></div>
+              </div>
+            </div>
+            <div style="position:absolute;bottom:22px;right:48px;font-family:'Archivo',sans-serif;font-size:12px;letter-spacing:.22em;color:#c7ab7d;z-index:5;">08 —</div>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- ===== SPREAD 4 · SELECTED WORK (browse in place) ===== -->
+      <sc-if value="{{ show4 }}" hint-placeholder-val="{{ true }}">
+        <div data-spr="4" style="position:absolute;inset:0;display:flex;animation:var(--spread-anim, spreadSlide) .5s ease;">
+          <!-- LEFT: big project image -->
+          <div style="width:660px;height:880px;position:relative;overflow:hidden;background:#2f5a86 url('data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27660%27%20height%3D%27880%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M0%20722C175%20648%20352%20796%20527%20708%20616%20663%20660%20692%20660%20692V880H0Z%27%20fill%3D%27%235a86b5%27%20opacity%3D%27.45%27%2F%3E%3Cpath%20d%3D%27M0%20754C175%20688%20357%20808%20530%20732%20618%20694%20660%20722%20660%20722V880H0Z%27%20fill%3D%27%23244e74%27%2F%3E%3C%2Fsvg%3E') no-repeat center / cover;">
+            <sc-for list="{{ projSlots }}" as="s" hint-placeholder-count="1">
+              <image-slot id="{{ s.slotId }}" shape="rect" placeholder="Project beeld" style="{{ s.slotStyle }}"></image-slot>
+            </sc-for>
+            <div style="position:absolute;left:0;right:0;bottom:0;height:320px;background:linear-gradient(to top, rgba(31,60,92,.9), rgba(31,60,92,0));pointer-events:none;"></div>
+            <div style="position:absolute;top:54px;left:56px;background:#17314a;color:#c7ab7d;padding:10px 20px;font-family:'Archivo Black',sans-serif;font-size:14px;letter-spacing:.05em;pointer-events:none;">{{ sel.numName }}</div>
+            <div style="position:absolute;left:56px;bottom:80px;pointer-events:none;">
+              <div style="font-family:'Archivo Black',sans-serif;font-size:62px;line-height:.9;color:#f1ebdf;">{{ sel.name }}</div>
+              <div style="margin-top:10px;font-family:'Archivo',sans-serif;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#c7ab7d;">{{ sel.cat }} · {{ sel.year }}</div>
+            </div>
+            <div style="position:absolute;bottom:22px;left:48px;font-family:'Archivo',sans-serif;font-size:12px;letter-spacing:.22em;color:#cdd6e2;z-index:5;pointer-events:none;">— 09</div>
+          </div>
+          <!-- RIGHT: detail + bottom project switcher bar -->
+          <div style="width:660px;height:880px;background:#eef1f5 url('data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27660%27%20height%3D%27880%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M0%20745C175%20675%20355%20808%20528%20728%20616%20688%20660%20715%20660%20715V880H0Z%27%20fill%3D%27%23d8dfea%27%2F%3E%3Cpath%20d%3D%27M0%20780C175%20720%20360%20822%20532%20758%20620%20723%20660%20748%20660%20748V880H0Z%27%20fill%3D%27%23cad4e3%27%2F%3E%3C%2Fsvg%3E') no-repeat center / cover;position:relative;overflow:hidden;padding:62px 56px 0;display:flex;flex-direction:column;">
+            <div style="font-family:'Archivo',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;font-weight:600;color:#8a7f6a;">{{ t.wkKicker }}</div>
+            <div style="flex:1;min-height:0;display:flex;flex-direction:column;padding-top:18px;">
+              <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;">
+                <div style="font-family:'Archivo Black',sans-serif;font-size:40px;line-height:.96;color:#1f1d1a;">{{ sel.name }}</div>
+                <div style="font-family:'Archivo',sans-serif;font-size:13px;letter-spacing:.2em;color:#8a7f6a;white-space:nowrap;">{{ sel.year }}</div>
+              </div>
+              <div style="font-family:'Archivo',sans-serif;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#c7ab7d;margin-top:8px;">{{ sel.cat }}</div>
+              <div style="margin-top:20px;font-family:'Spectral',serif;font-size:17px;line-height:1.66;color:#544e43;max-width:480px;">{{ sel.desc }}</div>
+              <div style="margin-top:22px;display:flex;flex-wrap:wrap;gap:8px;">
+                <sc-for list="{{ sel.tags }}" as="tg" hint-placeholder-count="3">
+                  <span style="padding:8px 18px;border:1px solid rgba(31,29,26,.26);border-radius:40px;font-family:'Archivo',sans-serif;font-size:13px;color:#1f1d1a;">{{ tg.label }}</span>
+                </sc-for>
+              </div>
+              <div style="margin-top:auto;display:flex;justify-content:space-between;align-items:center;font-family:'Archivo',sans-serif;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#8a7f6a;border-top:1px solid rgba(31,29,26,.14);padding:16px 0;">
+                <span>{{ t.wkWebsite }}</span>
+                <sc-if value="{{ sel.hasLink }}" hint-placeholder-val="{{ true }}">
+                  <a href="{{ sel.linkHref }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:7px;font-family:'Archivo',sans-serif;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#17314a;font-weight:600;text-decoration:none;border-bottom:1.5px solid #c7ab7d;padding-bottom:2px;" style-hover="color:#c7ab7d;">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14L21 3"></path><path d="M15 3h6v6"></path><path d="M19 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h6"></path></svg>
+                    {{ sel.url }}
+                  </a>
+                </sc-if>
+                <sc-if value="{{ sel.noLink }}" hint-placeholder-val="{{ false }}">
+                  <span style="display:inline-flex;align-items:center;gap:7px;color:#a39a89;">
+                    <span style="width:7px;height:7px;border-radius:50%;background:#c2bbac;display:inline-block;"></span>
+                    {{ sel.offline }}
+                  </span>
+                </sc-if>
+              </div>
+            </div>
+            <!-- bottom switcher bar -->
+            <div style="flex:none;border-top:1px solid rgba(31,29,26,.16);padding:16px 0 50px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+                <span style="font-family:'Archivo',sans-serif;font-size:11px;letter-spacing:.26em;text-transform:uppercase;font-weight:600;color:#8a7f6a;">{{ t.wkBarLabel }}</span>
+                <span onClick="{{ openPicker }}" style="font-family:'Archivo',sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:#2f5a86;cursor:pointer;border-bottom:1.5px solid #c7ab7d;padding-bottom:2px;" style-hover="color:#c7ab7d;">{{ t.wkHint }}</span>
+              </div>
+              <div style="display:flex;gap:12px;overflow-x:auto;padding-bottom:6px;scrollbar-width:thin;">
+                <sc-for list="{{ projList }}" as="p" hint-placeholder-count="4">
+                  <div onClick="{{ p.onClick }}" style="flex:none;width:168px;cursor:pointer;">
+                    <sc-if value="{{ p.active }}" hint-placeholder-val="{{ false }}">
+                      <div style="display:flex;flex-direction:column;gap:3px;padding:13px 16px;border-radius:8px;background:#2f5a86;border:1px solid #2f5a86;">
+                        <div style="font-family:'Archivo Black',sans-serif;font-size:17px;line-height:1;color:#c7ab7d;">{{ p.num }}</div>
+                        <div style="font-family:'Archivo Black',sans-serif;font-size:16px;color:#f1ebdf;">{{ p.name }}</div>
+                        <div style="font-family:'Spectral',serif;font-size:12px;line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:rgba(236,229,214,.82);">{{ p.cat }}</div>
+                      </div>
+                    </sc-if>
+                    <sc-if value="{{ p.inactive }}" hint-placeholder-val="{{ true }}">
+                      <div style="display:flex;flex-direction:column;gap:3px;padding:13px 16px;border-radius:8px;background:#ffffff;border:1px solid rgba(31,29,26,.16);">
+                        <div style="font-family:'Archivo Black',sans-serif;font-size:17px;line-height:1;color:#c7ab7d;">{{ p.num }}</div>
+                        <div style="font-family:'Archivo Black',sans-serif;font-size:16px;color:#1f1d1a;">{{ p.name }}</div>
+                        <div style="font-family:'Spectral',serif;font-size:12px;line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#6b6457;">{{ p.cat }}</div>
+                      </div>
+                    </sc-if>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+            <div style="position:absolute;bottom:22px;right:48px;font-family:'Archivo',sans-serif;font-size:12px;letter-spacing:.22em;color:#8a7f6a;z-index:5;">10 —</div>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- ===== SPREAD 5 · CONTACT ===== -->
+      <sc-if value="{{ show5 }}" hint-placeholder-val="{{ true }}">
+        <div data-spr="5" style="position:absolute;inset:0;display:flex;animation:var(--spread-anim, spreadSlide) .5s ease;">
+          <div style="width:660px;height:880px;background:#1f3c5c url('data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27660%27%20height%3D%27880%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M0%20722C175%20648%20352%20796%20527%20708%20616%20663%20660%20692%20660%20692V880H0Z%27%20fill%3D%27%232c5580%27%20opacity%3D%27.5%27%2F%3E%3Cpath%20d%3D%27M0%20754C175%20688%20357%20808%20530%20732%20618%20694%20660%20722%20660%20722V880H0Z%27%20fill%3D%27%2316304a%27%2F%3E%3C%2Fsvg%3E') no-repeat center / cover;position:relative;overflow:hidden;padding:62px 56px;display:flex;flex-direction:column;justify-content:space-between;">
+            <div style="font-family:'Archivo',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;font-weight:600;color:#c7ab7d;">{{ t.coKicker }}</div>
+            <div>
+              <div style="font-family:'Archivo Black',sans-serif;font-size:118px;line-height:.84;color:#f1ebdf;">{{ t.coBig1 }}</div>
+              <div style="font-family:'Archivo Black',sans-serif;font-size:118px;line-height:.92;color:transparent;-webkit-text-stroke:2px #c7ab7d;">{{ t.coBig2 }}</div>
+            </div>
+            <div style="font-family:'Spectral',serif;font-style:italic;font-size:22px;line-height:1.45;color:#ece5d6;max-width:420px;">{{ t.coSub }}</div>
+            <div style="font-family:'Archivo',sans-serif;font-size:14px;letter-spacing:.22em;text-transform:uppercase;color:#c7ab7d;">noaphilene.dev</div>
+            <div style="position:absolute;bottom:22px;left:48px;font-family:'Archivo',sans-serif;font-size:12px;letter-spacing:.22em;color:#c7ab7d;z-index:5;">— 11</div>
+          </div>
+          <div style="width:660px;height:880px;background:#16304a url('data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27660%27%20height%3D%27880%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M0%20722C175%20648%20352%20796%20527%20708%20616%20663%20660%20692%20660%20692V880H0Z%27%20fill%3D%27%2324486c%27%20opacity%3D%27.5%27%2F%3E%3Cpath%20d%3D%27M0%20754C175%20688%20357%20808%20530%20732%20618%20694%20660%20722%20660%20722V880H0Z%27%20fill%3D%27%230f2236%27%2F%3E%3C%2Fsvg%3E') no-repeat center / cover;position:relative;overflow:hidden;padding:62px 56px;display:flex;flex-direction:column;">
+            <svg viewBox="0 0 660 300" preserveAspectRatio="none" style="position:absolute;left:0;top:0;width:100%;height:300px;transform:scaleY(-1);">
+              <path d="M0,170 C150,90 330,250 510,160 C600,118 660,150 660,150 L660,320 L0,320 Z" fill="#17314a"></path>
+              <path d="M0,215 C150,150 350,270 520,200 C610,165 660,200 660,200 L660,320 L0,320 Z" fill="#1d3a57" opacity=".7"></path>
+            </svg>
+            <div style="position:relative;width:200px;height:200px;align-self:flex-end;margin-bottom:8px;">
+              <image-slot id="contact-photo" shape="circle" placeholder="Foto" style="width:200px;height:200px;display:block;border-radius:50%;box-shadow:0 14px 34px rgba(0,0,0,.4);"></image-slot>
+              <div style="position:absolute;inset:-9px;border:1px solid rgba(199,171,125,.5);border-radius:50%;pointer-events:none;"></div>
+            </div>
+            <div style="margin-top:auto;">
+              <div style="display:flex;justify-content:space-between;align-items:baseline;padding:17px 0;border-top:1px solid rgba(236,229,214,.2);"><span style="font-family:'Archivo',sans-serif;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#c7ab7d;">{{ t.coL1 }}</span><span style="font-family:'Archivo Black',sans-serif;font-size:17px;color:#f1ebdf;">Noavanmil@gmail.com</span></div>
+              <div style="display:flex;justify-content:space-between;align-items:baseline;padding:17px 0;border-top:1px solid rgba(236,229,214,.2);"><span style="font-family:'Archivo',sans-serif;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#c7ab7d;">{{ t.coL2 }}</span><a href="https://www.linkedin.com/in/noaphilene" target="_blank" rel="noopener" style="font-family:'Archivo Black',sans-serif;font-size:17px;color:#f1ebdf;text-decoration:none;border-bottom:1.5px solid #c7ab7d;padding-bottom:2px;" style-hover="color:#c7ab7d;">linkedin.com/in/noaphilene</a></div>
+              <div style="display:flex;justify-content:space-between;align-items:baseline;padding:17px 0;border-top:1px solid rgba(236,229,214,.2);"><span style="font-family:'Archivo',sans-serif;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#c7ab7d;">{{ t.coL3 }}</span><span style="font-family:'Archivo Black',sans-serif;font-size:17px;color:#f1ebdf;">Gorinchem</span></div>
+              
+            </div>
+            <div style="position:absolute;bottom:22px;right:48px;font-family:'Archivo',sans-serif;font-size:12px;letter-spacing:.22em;color:#c7ab7d;z-index:5;">12 —</div>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- full-page project picker overlay -->
+      <sc-if value="{{ pickerOpen }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;inset:0;z-index:40;background:#16304a url('data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%271320%27%20height%3D%27880%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M0%20720C350%20630%20700%20800%201050%20700%201230%20648%201320%20690%201320%20690V880H0Z%27%20fill%3D%27%23244e74%27%20opacity%3D%27.5%27%2F%3E%3Cpath%20d%3D%27M0%20760C350%20680%20720%20812%201060%20730%201240%20690%201320%20724%201320%20724V880H0Z%27%20fill%3D%27%230f2236%27%2F%3E%3C%2Fsvg%3E') no-repeat center / cover;padding:64px 72px;display:flex;flex-direction:column;animation:spreadFade .35s ease;">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+            <div>
+              <div style="font-family:'Archivo',sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;font-weight:600;color:#c7ab7d;">{{ t.wkKicker }}</div>
+              <div style="margin-top:12px;font-family:'Archivo Black',sans-serif;font-size:64px;line-height:.9;color:#f1ebdf;">{{ t.wkPickTitle }}</div>
+            </div>
+            <button onClick="{{ closePicker }}" style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.06);border:1px solid rgba(236,229,214,.24);color:#f1ebdf;border-radius:40px;padding:12px 22px;cursor:pointer;font-family:'Archivo',sans-serif;font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;" style-hover="background:rgba(255,255,255,.14);">
+              {{ t.wkPickClose }}
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18"></path><path d="M6 6l12 12"></path></svg>
+            </button>
+          </div>
+          <div style="margin-top:44px;flex:1;min-height:0;overflow-y:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-content:start;padding-right:6px;">
+            <sc-for list="{{ gridList }}" as="g" hint-placeholder-count="6">
+              <div onClick="{{ g.onClick }}" style="cursor:pointer;display:flex;">
+                <sc-if value="{{ g.active }}" hint-placeholder-val="{{ false }}">
+                  <div style="flex:1;display:flex;flex-direction:column;gap:7px;padding:24px;border-radius:12px;min-height:168px;background:#2f5a86;border:1px solid #c7ab7d;">
+                    <div style="font-family:'Archivo Black',sans-serif;font-size:24px;line-height:1;color:#c7ab7d;">{{ g.num }}</div>
+                    <div style="font-family:'Archivo Black',sans-serif;font-size:23px;color:#f1ebdf;">{{ g.name }}</div>
+                    <div style="font-family:'Spectral',serif;font-size:14px;color:rgba(236,229,214,.9);">{{ g.cat }}</div>
+                    <div style="margin-top:auto;font-family:'Archivo',sans-serif;font-size:12px;letter-spacing:.2em;color:#c7ab7d;">{{ g.year }}</div>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ g.inactive }}" hint-placeholder-val="{{ true }}">
+                  <div style="flex:1;display:flex;flex-direction:column;gap:7px;padding:24px;border-radius:12px;min-height:168px;background:rgba(255,255,255,.04);border:1px solid rgba(236,229,214,.18);">
+                    <div style="font-family:'Archivo Black',sans-serif;font-size:24px;line-height:1;color:#c7ab7d;">{{ g.num }}</div>
+                    <div style="font-family:'Archivo Black',sans-serif;font-size:23px;color:#f1ebdf;">{{ g.name }}</div>
+                    <div style="font-family:'Spectral',serif;font-size:14px;color:rgba(236,229,214,.7);">{{ g.cat }}</div>
+                    <div style="margin-top:auto;font-family:'Archivo',sans-serif;font-size:12px;letter-spacing:.2em;color:#c7ab7d;">{{ g.year }}</div>
+                  </div>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- page-turn leaf -->
+      <sc-if value="{{ flipActive }}" hint-placeholder-val="{{ false }}">
+        <div style="{{ leafShadeStyle }}"></div>
+        <div style="{{ leafStyle }}">
+          <div style="{{ leafFrontStyle }}"><div data-face="front" style="position:absolute;inset:0;overflow:hidden;"></div><div style="{{ leafGlossStyle }}"></div></div>
+          <div style="{{ leafBackStyle }}"><div data-face="back" style="position:absolute;inset:0;overflow:hidden;"></div><div style="{{ leafGlossStyle }}"></div></div>
+        </div>
+      </sc-if>
+
+      <!-- center fold -->
+      <div style="position:absolute;top:0;bottom:0;left:50%;width:96px;transform:translateX(-50%);pointer-events:none;z-index:8;background:linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 38%, rgba(0,0,0,.26) 50%, rgba(0,0,0,.10) 62%, rgba(0,0,0,0) 100%);"></div>
+      <div style="position:absolute;top:0;bottom:0;left:50%;width:2px;transform:translateX(-50%);pointer-events:none;z-index:9;background:rgba(0,0,0,.32);"></div>
+
+    </div>
+  </div>
+
+  <!-- arrows -->
+  <button onClick="{{ prev }}" style="position:fixed;left:28px;top:50%;transform:translateY(-50%);width:58px;height:58px;border-radius:50%;border:none;background:#fff;color:#17314a;box-shadow:0 8px 24px rgba(0,0,0,.18);cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:60;opacity:{{ prevOpacity }};transition:background .2s,color .2s;" style-hover="background:#17314a;color:#fff;">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></svg>
+  </button>
+  <button onClick="{{ next }}" style="position:fixed;right:28px;top:50%;transform:translateY(-50%);width:58px;height:58px;border-radius:50%;border:none;background:#fff;color:#17314a;box-shadow:0 8px 24px rgba(0,0,0,.18);cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:60;opacity:{{ nextOpacity }};transition:background .2s,color .2s;" style-hover="background:#17314a;color:#fff;">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"></path></svg>
+  </button>
+
+  <!-- bottom indicator -->
+  <div style="position:fixed;bottom:0;left:0;right:0;height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 42px;z-index:60;">
+    <span style="font-family:'Archivo',sans-serif;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#5f5849;">P. {{ pageLabel }} · {{ navTitle }}</span>
+    <div style="display:flex;align-items:center;gap:8px;">
+      <sc-for list="{{ dots }}" as="d" hint-placeholder-count="6">
+        <button onClick="{{ d.go }}" style="{{ d.style }}"></button>
+      </sc-for>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:&quot;100%&quot;},&quot;defaultLang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;EN&quot;,&quot;NL&quot;],&quot;default&quot;:&quot;EN&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;loopNav&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;startSpread&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:0,&quot;min&quot;:0,&quot;max&quot;:5,&quot;tsType&quot;:&quot;number&quot;}}">
+const STRINGS = {
+  en: {
+    titles: ['Cover','Contents','About','Skills & Process','Selected Work','Contact'],
+    am2Kicker: 'About Me · 04', am2Big1: 'ABOUT', am2Big2: 'ME', am2Tag: 'Born in Gorinchem, at home in the digital world.',
+    am2Intro: 'A bit more about me', am2L1: 'Born', am2L2: 'Studying',
+    am2Body: "I'm Noa van Mil and I was born in 2008 in Gorinchem. It's also where I grew up and where I still love to live. I enjoy doing activities with friends, but my biggest interest lies in the digital world. I like gaming, but also helping people become digitally skilled. To turn my hobby into my job, I chose the Creative Software Development programme. I'm currently following this study with pleasure and interest and I'm still learning a lot. In the future I hope to develop myself further in this and eventually make it my profession.",
+    wkKicker: 'Selected Work · 03', wkBarLabel: 'All projects', wkHint: 'View all projects', wkOffline: 'Not public yet', wkPickTitle: 'Select a project', wkPickClose: 'Close', wkWebsite: 'Live link',
+    cvKicker: 'Selected Work', cvTag: 'Code is a craft — and the web speaks for itself.', cvName: 'Web Developer', cvRole2: 'DEVELOPER',
+    ctKicker: 'Inside this issue', ctBig1: 'CON—', ctBig2: 'TENTS', ctIntro: 'A short magazine about the things I build for the web — selected projects, the tools I reach for, and the way I like to work.', ctPages: 'Pages',
+    i1t: 'About', i1d: 'Who I am and what I care about.',
+    i2t: 'Skills & Process', i2d: 'The stack I use and how I work.',
+    i3t: 'Selected Work', i3d: 'Browse my projects — switch between them on the page.',
+    i4t: 'About Me', i4d: 'My story — from Gorinchem to code.',
+    i5t: 'Contact', i5d: "Let's build something together.",
+    abKicker: 'About · 01', abBig1: 'ABOUT', abBig2: 'ME', abBio: "I'm Noa van Mil and I was born in 2008 in Gorinchem. It's also where I grew up and where I still love to live. I enjoy doing activities with friends, but my biggest interest lies in the digital world. I like gaming, but also helping people become digitally skilled. To turn my hobby into my job, I chose the Creative Software Development programme. I'm currently following this study with pleasure and interest and I'm still learning a lot. In the future I hope to develop myself further in this and eventually make it my profession.", abAbout: 'A bit about me', abL1: 'Based', abV1: 'Netherlands', abL2: 'Focus', abL3: 'Since',
+    skKicker: 'Skills · 02', skAnim: 'p5.js', skSpec: 'Specialities', skProcess: 'Process', skPw1: 'HOW IT', skPw2: 'WORKS',
+    st1t: 'Discovery', st1d: "We map the goals, scope and the people you're building for.",
+    st2t: 'Design', st2d: 'Wireframes and designs, refined until it clicks.',
+    st3t: 'Build', st3d: 'Accessible code — built to last and easy to maintain.',
+    st4t: 'Launch', st4d: 'Carefully launched and supported well after going live.',
+    p1Desc: 'A headless storefront with a custom design system, built for speed. Sub-second navigation, fluid product pages and a checkout flow that genuinely converts.', p1Cap: 'Headless storefront · 2025',
+    p2Kicker: 'Selected Work · 04', p2Desc: 'A data-heavy analytics dashboard and the reusable component library behind it. Dark-mode first, fully typed, and documented in Storybook so the team can move fast.',
+    coKicker: 'Get in touch · 05', coBig1: "LET'S", coBig2: 'TALK', coSub: 'Always up for a good project, a chat, or learning something new together.', coL1: 'Email', coL2: 'LinkedIn', coL3: 'Location', coL4: 'Online',
+  },
+  nl: {
+    titles: ['Cover','Inhoud','Over mij','Skills & werkwijze','Geselecteerd werk','Contact'],
+    am2Kicker: 'Over mij · 04', am2Big1: 'OVER', am2Big2: 'MIJ', am2Tag: 'Geboren in Gorinchem, thuis in de digitale wereld.',
+    am2Intro: 'Iets meer over mij', am2L1: 'Geboren', am2L2: 'Opleiding',
+    am2Body: 'Ik ben Noa van Mil en ik ben in 2008 in Gorinchem geboren. Dit is ook waar ik ben opgegroeid en waar ik nog steeds graag woon. Ik vind het leuk om met vrienden activiteiten te ondernemen, maar mijn grootste interesse ligt toch in de digitale wereld. Ik vind het leuk om te gamen, maar ook om mensen te helpen digitaal vaardig te zijn. Om van mijn hobby dan ook mijn baan te maken heb ik voor de opleiding Creative Software Development gekozen. Op dit moment volg ik met plezier en interesse deze opleiding en ben ik nog veel aan het leren. In de toekomst hoop ik mij hier verder in te ontwikkelen en uiteindelijk mijn beroep van te maken.',
+    wkKicker: 'Geselecteerd werk · 03', wkBarLabel: 'Alle projecten', wkHint: 'Bekijk alle projecten', wkOffline: 'Nog niet online', wkPickTitle: 'Kies een project', wkPickClose: 'Sluiten', wkWebsite: 'Live link',
+    cvKicker: 'Geselecteerd werk', cvTag: 'Code is een ambacht — en het web spreekt voor zich.', cvName: 'Webontwikkelaar', cvRole2: 'ONTWIKKELAAR',
+    ctKicker: 'In deze editie', ctBig1: 'IN—', ctBig2: 'HOUD', ctIntro: 'Een klein magazine over wat ik voor het web bouw — geselecteerde projecten, de tools die ik gebruik en hoe ik werk.', ctPages: "Pagina's",
+    i1t: 'Over mij', i1d: 'Wie ik ben en wat ik belangrijk vind.',
+    i2t: 'Skills & werkwijze', i2d: 'Mijn stack en hoe ik werk.',
+    i3t: 'Geselecteerd werk', i3d: 'Blader door mijn projecten — wissel ze op de pagina.',
+    i4t: 'Over mij', i4d: 'Mijn verhaal — van Gorinchem tot code.',
+    i5t: 'Contact', i5d: 'Laten we samen iets bouwen.',
+    abKicker: 'Over · 01', abBig1: 'OVER', abBig2: 'MIJ', abBio: 'Ik ben Noa van Mil en ik ben in 2008 in Gorinchem geboren. Dit is ook waar ik ben opgegroeid en waar ik nog steeds graag woon. Ik vind het leuk om met vrienden activiteiten te ondernemen, maar mijn grootste interesse ligt toch in de digitale wereld. Ik vind het leuk om te gamen, maar ook om mensen te helpen digitaal vaardig te zijn. Om van mijn hobby dan ook mijn baan te maken heb ik voor de opleiding Creative Software Development gekozen. Op dit moment volg ik met plezier en interesse deze opleiding en ben ik nog veel aan het leren. In de toekomst hoop ik mij hier verder in te ontwikkelen en uiteindelijk mijn beroep van te maken.', abAbout: 'Even voorstellen', abL1: 'Woonplaats', abV1: 'Nederland', abL2: 'Focus', abL3: 'Sinds',
+    skKicker: 'Skills · 02', skAnim: 'p5.js', skSpec: 'Specialiteiten', skProcess: 'Werkwijze', skPw1: 'ZO', skPw2: 'WERK IK',
+    st1t: 'Ontdekken', st1d: 'We brengen de doelen, scope en je gebruikers in kaart.',
+    st2t: 'Ontwerp', st2d: 'Wireframes en designs, verfijnd tot het klopt.',
+    st3t: 'Bouwen', st3d: 'Toegankelijke code — gebouwd om te blijven en makkelijk te onderhouden.',
+    st4t: 'Lancering', st4d: 'Zorgvuldig live gezet en ook daarna goed onderhouden.',
+    p1Desc: "Een headless webshop met een eigen design system, gebouwd voor snelheid. Navigatie binnen een seconde, vloeiende productpagina's en een checkout die echt converteert.", p1Cap: 'Headless webshop · 2025',
+    p2Kicker: 'Geselecteerd werk · 04', p2Desc: 'Een datarijk analytics-dashboard en de herbruikbare componentenbibliotheek erachter. Dark-mode first, volledig getypeerd en gedocumenteerd in Storybook zodat het team snel werkt.',
+    coKicker: 'Contact · 05', coBig1: 'ZEG', coBig2: 'HALLO', coSub: 'Altijd in voor een mooi project, een gesprek of samen iets nieuws leren.', coL1: 'E-mail', coL2: 'LinkedIn', coL3: 'Locatie', coL4: 'Online',
+  }
+};
+
+class Component extends DCLogic {
+  constructor(props){
+    super(props);
+    this.N = 6;
+    this.magRef = React.createRef();
+    this.frontFaceRef = React.createRef();
+    this.backFaceRef = React.createRef();
+    // ── PROJECTS ── add as many as you like; the Selected Work page browses them in place.
+    this.projects = [
+      { id:'aurora', name:'Aurora', year:'2025', url:'aurora.shop',
+        cat:{en:'E-commerce Platform', nl:'E-commerceplatform'},
+        role:{en:'Design & Front-end', nl:'Ontwerp & Front-end'},
+        desc:{en:'A headless storefront with a custom design system, built for speed. Sub-second navigation, fluid product pages and a checkout flow that genuinely converts.', nl:"Een headless webshop met een eigen design system, gebouwd voor snelheid. Navigatie binnen een seconde, vloeiende productpagina's en een checkout die echt converteert."},
+        tags:['Next.js','TypeScript','Stripe'] },
+      { id:'lumen', name:'Lumen', year:'2024', url:'',
+        cat:{en:'Dashboard & Design System', nl:'Dashboard & Design System'},
+        role:{en:'Front-end & UI', nl:'Front-end & UI'},
+        desc:{en:'A data-heavy analytics dashboard and the reusable component library behind it. Dark-mode first, fully typed, and documented in Storybook so the team can move fast.', nl:'Een datarijk analytics-dashboard en de herbruikbare componentenbibliotheek erachter. Dark-mode first, volledig getypeerd en gedocumenteerd in Storybook zodat het team snel werkt.'},
+        tags:['React','Storybook','D3'] },
+      { id:'atlas', name:'Atlas', year:'2024', url:'atlasstudio.nl',
+        cat:{en:'Marketing Website', nl:'Marketingwebsite'},
+        role:{en:'Design & Build', nl:'Ontwerp & Bouw'},
+        desc:{en:'A bold, animation-rich marketing site with a CMS the client actually enjoys using. Smooth scroll, lazy-loaded media and a near-perfect Lighthouse score.', nl:'Een gedurfde, animatierijke marketingsite met een CMS waar de klant echt graag mee werkt. Smooth scroll, lazy-loaded media en een bijna perfecte Lighthouse-score.'},
+        tags:['Astro','GSAP','Sanity'] },
+      { id:'pulse', name:'Pulse', year:'2023', url:'',
+        cat:{en:'Mobile App', nl:'Mobiele app'},
+        role:{en:'Front-end', nl:'Front-end'},
+        desc:{en:'A fitness companion app with offline sync and a playful, tactile interface. Real-time charts, haptics and a design language that keeps people coming back.', nl:'Een fitness-app met offline sync en een speelse, tactiele interface. Realtime grafieken, haptics en een ontwerptaal die mensen terug laat komen.'},
+        tags:['React Native','Expo','SQLite'] },
+    ];
+    const start = Math.min(Math.max(props.startSpread || 0, 0), this.N - 1);
+    const lang = (props.defaultLang || 'EN').toLowerCase() === 'nl' ? 'nl' : 'en';
+    this.state = { i: start, lang: lang, proj: 0 };
+    this._onResize = () => this.fit();
+    this._onKey = (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'PageDown') this.next();
+      else if (e.key === 'ArrowLeft' || e.key === 'PageUp') this.prev();
+    };
+  }
+  componentDidMount(){
+    this.fit();
+    this.applyAnim();
+    window.addEventListener('resize', this._onResize);
+    window.addEventListener('keydown', this._onKey);
+  }
+  componentDidUpdate(prev){
+    this.applyFlipLayers();
+  }
+  applyFlipLayers(){
+    const root = this.magRef.current; if (!root) return;
+    const els = root.querySelectorAll('[data-spr]');
+    els.forEach(el => { el.style.zIndex=''; el.style.clipPath=''; });
+    const f = this.state.flip; if (!f) return;
+    const toEl = root.querySelector('[data-spr="'+f.to+'"]');
+    const fromEl = root.querySelector('[data-spr="'+f.from+'"]');
+    if (toEl) { toEl.style.zIndex='1'; toEl.style.clipPath='none'; }
+    if (fromEl) { fromEl.style.zIndex='2'; fromEl.style.clipPath = f.dir==='next' ? 'inset(0 50% 0 0)' : 'inset(0 0 0 50%)'; }
+    this.fillLeafFaces(f, fromEl, toEl);
+  }
+  fillLeafFaces(f, fromEl, toEl){
+    const root = this.magRef.current; if (!root) return;
+    const leaf = root.querySelector('div[style*="preserve-3d"]');
+    if (!leaf || leaf.children.length < 2) return;
+    const front = leaf.children[0].children[0];
+    const back = leaf.children[1].children[0];
+    if (!front || !back) return;
+    const isNext = f.dir === 'next';
+    // front = the moving half of the OUTGOING spread; back = the moving half of the INCOMING spread
+    const frontHalf = isNext ? 'right' : 'left';
+    const backHalf  = isNext ? 'left'  : 'right';
+    // The back face already carries rotateY(180deg), which flips orientation on its own —
+    // so BOTH faces mount their clone with NO extra mirroring.
+    this._mountHalf(front, fromEl, frontHalf);
+    this._mountHalf(back, toEl, backHalf);
+  }
+  _mountHalf(host, srcSpread, half){
+    host.innerHTML = '';
+    host.style.transform = 'none';
+    if (!srcSpread) return;
+    let clone;
+    try { clone = srcSpread.cloneNode(true); } catch (e) { return; }
+    // neutralize custom elements (image-slot) so they don't re-run their constructor.
+    // snapshot the live image (if any) as a background on a plain div.
+    try {
+      const liveSlots = srcSpread.querySelectorAll('image-slot');
+      const cloneSlots = clone.querySelectorAll('image-slot');
+      cloneSlots.forEach((cs, idx) => {
+        const div = document.createElement('div');
+        div.setAttribute('style', cs.getAttribute('style') || '');
+        const live = liveSlots[idx];
+        let img = null;
+        if (live) { const im = live.shadowRoot ? live.shadowRoot.querySelector('img') : live.querySelector('img'); if (im && im.src) img = im.src; }
+        div.style.backgroundSize = 'cover';
+        div.style.backgroundPosition = 'center';
+        div.style.background = img ? ('#0f2236 center/cover url("' + img + '")') : '#12293f';
+        cs.parentNode.replaceChild(div, cs);
+      });
+    } catch (e) {}
+    clone.style.animation = 'none';
+    clone.style.zIndex = '';
+    clone.style.clipPath = 'none';
+    clone.style.position = 'absolute';
+    clone.style.top = '0';
+    clone.style.left = '0';
+    clone.style.width = '1320px';
+    clone.style.height = '880px';
+    clone.style.transform = (half === 'right' ? 'translateX(-660px)' : 'translateX(0)');
+    clone.style.transformOrigin = 'left top';
+    host.appendChild(clone);
+  }
+  componentWillUnmount(){
+    window.removeEventListener('resize', this._onResize);
+    window.removeEventListener('keydown', this._onKey);
+    clearTimeout(this._t1); clearTimeout(this._t2);
+  }
+  applyAnim(){
+    // Only the page-turn animates spread changes; the underlying spread never slides/fades.
+    if (this.magRef.current) this.magRef.current.style.setProperty('--spread-anim', 'none');
+  }
+  fit(){
+    const el = this.magRef.current;
+    if (!el) return;
+    const s = Math.min((window.innerWidth - 210) / 1320, (window.innerHeight - 150) / 880);
+    el.style.transform = 'translate(-50%,-50%) scale(' + Math.max(s, 0.1) + ')';
+  }
+  next(){
+    if (this.state.flip) return;
+    const loop = !!this.props.loopNav;
+    let to = this.state.i + 1;
+    if (to >= this.N) { if (loop) to = 0; else return; }
+    this.startFlip('next', to);
+  }
+  prev(){
+    if (this.state.flip) return;
+    const loop = !!this.props.loopNav;
+    let to = this.state.i - 1;
+    if (to < 0) { if (loop) to = this.N - 1; else return; }
+    this.startFlip('prev', to);
+  }
+  startFlip(dir, to){
+    if (this.magRef.current) this.magRef.current.style.setProperty('--spread-anim', 'none');
+    this.setState({ flip: { dir: dir, from: this.state.i, to: to } });
+    clearTimeout(this._t1); clearTimeout(this._t2);
+    this._t2 = setTimeout(() => { this.setState({ i: to, flip: null }); this.applyAnim(); }, 1200);
+  }
+  goTo(n){
+    if (this.state.flip) return;
+    this.setState({ i: Math.min(Math.max(n, 0), this.N - 1) });
+  }
+  setLang(l){ this.setState({ lang: l }); }
+  selectProject(idx){ this.setState({ proj: idx }); }
+  renderVals(){
+    const i = this.state.i, loop = !!this.props.loopNav, lang = this.state.lang;
+    const t = STRINGS[lang];
+    const L = String(2 * i + 1).padStart(2, '0');
+    const R = String(2 * i + 2).padStart(2, '0');
+    const dot = (d) => ({
+      go: () => this.goTo(d),
+      style: d === i
+        ? { width:'26px', height:'6px', borderRadius:'4px', background:'#17314a', border:'none', cursor:'pointer', padding:'0', transition:'all .25s ease' }
+        : { width:'10px', height:'6px', borderRadius:'4px', background:'rgba(31,29,26,.24)', border:'none', cursor:'pointer', padding:'0', transition:'all .25s ease' }
+    });
+    const langBtn = (active) => ({
+      padding:'5px 12px', border:'none', borderRadius:'24px', cursor:'pointer',
+      fontFamily:"'Archivo',sans-serif", fontSize:'12px', fontWeight:'700', letterSpacing:'.08em',
+      background: active ? '#17314a' : 'transparent', color: active ? '#fff' : '#8a7f6a', transition:'all .2s ease'
+    });
+    // ── projects ──
+    const projects = this.projects;
+    const proj = Math.min(this.state.proj || 0, projects.length - 1);
+    const cur = projects[proj];
+    const hasLink = !!(cur.url && String(cur.url).trim());
+    const cleanUrl = hasLink ? String(cur.url).replace(/^https?:\/\//, '').replace(/\/$/, '') : '';
+    const sel = {
+      name: cur.name, year: cur.year, cat: cur.cat[lang], role: cur.role[lang], desc: cur.desc[lang],
+      numName: 'No_' + String(proj + 1).padStart(2, '0'),
+      tags: cur.tags.map(tg => ({ label: tg })),
+      hasLink: hasLink, noLink: !hasLink,
+      url: cleanUrl, linkHref: hasLink ? ('https://' + cleanUrl) : '#',
+      offline: t.wkOffline,
+    };
+    const projList = projects.map((p, idx) => {
+      const active = idx === proj;
+      return {
+        onClick: () => this.selectProject(idx),
+        num: String(idx + 1).padStart(2, '0'),
+        name: p.name,
+        cat: p.cat[lang],
+        year: p.year,
+        active: active, inactive: !active,
+      };
+    });
+    const projSlots = projects.map((p, idx) => ({
+      slotId: 'proj-' + p.id,
+      slotStyle: { position:'absolute', inset:'0', width:'100%', height:'100%', display: idx === proj ? 'block' : 'none' },
+    }));
+    const gridList = projects.map((p, idx) => {
+      const active = idx === proj;
+      return {
+        onClick: () => { this.selectProject(idx); this.setState({ pickerOpen: false }); },
+        num: String(idx + 1).padStart(2, '0'),
+        name: p.name, cat: p.cat[lang], year: p.year,
+        active: active, inactive: !active,
+      };
+    });
+    // ── page-turn leaf ──
+    const leftBg  = ['#17314a','#eef1f5','#1f3c5c','#eef1f5','#2f5a86','#1f3c5c'];
+    const rightBg = ['#102338','#eef1f5','#eef1f5','#1f3c5c','#eef1f5','#16304a'];
+    const flip = this.state.flip;
+    const sh = (k) => (i === k) || (!!flip && (flip.from === k || flip.to === k));
+    let flipActive = false, leafStyle = {}, leafFrontStyle = {}, leafBackStyle = {}, leafShadeStyle = {}, leafGlossStyle = {};
+    if (flip) {
+      flipActive = true;
+      const isNext = flip.dir === 'next';
+      const DUR = '1.18s', EASE = 'cubic-bezier(.62,.02,.34,1)';
+      const frontBg = isNext ? rightBg[flip.from] : leftBg[flip.from];
+      const backBg  = isNext ? leftBg[flip.to]   : rightBg[flip.to];
+      // sheen fakes the paper curving: darker toward the spine, soft light toward the outer edge
+      var frontSheen = isNext
+        ? 'linear-gradient(to right, rgba(0,0,0,.26) 0%, rgba(0,0,0,0) 26%, rgba(255,255,255,.10) 72%, rgba(0,0,0,.18) 100%)'
+        : 'linear-gradient(to left, rgba(0,0,0,.26) 0%, rgba(0,0,0,0) 26%, rgba(255,255,255,.10) 72%, rgba(0,0,0,.18) 100%)';
+      var backSheen = isNext
+        ? 'linear-gradient(to left, rgba(0,0,0,.26) 0%, rgba(0,0,0,0) 26%, rgba(255,255,255,.10) 72%, rgba(0,0,0,.18) 100%)'
+        : 'linear-gradient(to right, rgba(0,0,0,.26) 0%, rgba(0,0,0,0) 26%, rgba(255,255,255,.10) 72%, rgba(0,0,0,.18) 100%)';
+      const faceBase = { position:'absolute', inset:'0', backfaceVisibility:'hidden', WebkitBackfaceVisibility:'hidden', boxShadow:'inset 0 0 90px rgba(0,0,0,.20)', borderRadius:'2px', overflow:'hidden' };
+      leafStyle = {
+        position:'absolute', top:'0', bottom:'0', width:'50%',
+        left: isNext ? '50%' : '0',
+        transformOrigin: isNext ? 'left center' : 'right center',
+        transformStyle:'preserve-3d', WebkitTransformStyle:'preserve-3d',
+        zIndex:20, willChange:'transform',
+        animation: (isNext ? 'leafNext' : 'leafPrev') + ' ' + DUR + ' ' + EASE + ' forwards, leafLift ' + DUR + ' ease-in-out forwards',
+      };
+      leafFrontStyle = Object.assign({}, faceBase, { backgroundColor: frontBg, backgroundImage: frontSheen });
+      leafBackStyle  = Object.assign({}, faceBase, { backgroundColor: backBg, backgroundImage: backSheen, transform:'rotateY(180deg)' });
+      leafGlossStyle = {
+        position:'absolute', inset:'0', pointerEvents:'none',
+        backgroundImage:'linear-gradient(105deg, rgba(255,255,255,0) 42%, rgba(255,255,255,.4) 50%, rgba(255,255,255,0) 58%)',
+        backgroundSize:'260% 100%', opacity:'0',
+        animation:'leafGloss ' + DUR + ' ease forwards',
+      };
+      leafShadeStyle = {
+        position:'absolute', top:'0', bottom:'0', width:'50%',
+        left: isNext ? '0' : '50%',
+        background: isNext ? 'linear-gradient(to right, rgba(6,14,24,.5), rgba(6,14,24,0) 82%)' : 'linear-gradient(to left, rgba(6,14,24,.5), rgba(6,14,24,0) 82%)',
+        zIndex:19, pointerEvents:'none', opacity:'0',
+        animation: (isNext ? 'leafShadeL' : 'leafShadeR') + ' ' + DUR + ' ease forwards',
+      };
+    }
+    return {
+      flipActive: flipActive, leafStyle: leafStyle, leafFrontStyle: leafFrontStyle, leafBackStyle: leafBackStyle, leafShadeStyle: leafShadeStyle, leafGlossStyle: leafGlossStyle,
+      sel: sel, projList: projList, projSlots: projSlots, gridList: gridList,
+      pickerOpen: !!this.state.pickerOpen,
+      openPicker: () => this.setState({ pickerOpen: true }),
+      closePicker: () => this.setState({ pickerOpen: false }),
+      magRef: this.magRef,
+      t: t,
+      navTitle: t.titles[i],
+      pageLabel: L + '–' + R,
+      prev: () => this.prev(),
+      next: () => this.next(),
+      setEn: () => this.setLang('en'),
+      setNl: () => this.setLang('nl'),
+      enStyle: langBtn(lang === 'en'),
+      nlStyle: langBtn(lang === 'nl'),
+      go2: () => this.goTo(2), go3: () => this.goTo(3), go4: () => this.goTo(4), go5: () => this.goTo(5),
+      show0: sh(0), show1: sh(1), show2: sh(2), show3: sh(3), show4: sh(4), show5: sh(5),
+      prevOpacity: (i === 0 && !loop) ? 0.28 : 1,
+      nextOpacity: (i === this.N - 1 && !loop) ? 0.28 : 1,
+      dots: [0,1,2,3,4,5].map(dot),
+    };
+  }
+}
+</script>
+</body>
+</html>

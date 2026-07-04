@@ -1,0 +1,80 @@
+.magazine-desktop * {
+  box-sizing: border-box;
+}
+
+@keyframes spreadFade {
+  from {
+    transform: scale(0.985);
+    opacity: 0.6;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@keyframes leafNext {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(-179deg);
+  }
+}
+@keyframes leafPrev {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(179deg);
+  }
+}
+@keyframes leafShadeR {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes leafShadeL {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes leafGloss {
+  0% {
+    opacity: 0;
+    background-position: -40% 0;
+  }
+  22% {
+    opacity: 0.55;
+  }
+  72% {
+    opacity: 0.55;
+  }
+  100% {
+    opacity: 0;
+    background-position: 140% 0;
+  }
+}
+@keyframes leafLift {
+  0% {
+    box-shadow: 0 8px 20px rgba(6, 14, 24, 0.18);
+  }
+  50% {
+    box-shadow: 0 40px 90px rgba(6, 14, 24, 0.5);
+  }
+  100% {
+    box-shadow: 0 8px 20px rgba(6, 14, 24, 0.18);
+  }
+}
