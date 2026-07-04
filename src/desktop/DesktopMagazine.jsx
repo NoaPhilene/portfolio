@@ -44,7 +44,7 @@ export default function DesktopMagazine() {
     function fit() {
       const el = stageRef.current;
       if (!el) return;
-      const s = Math.min((window.innerWidth - 210) / 1320, (window.innerHeight - 150) / 880);
+      const s = Math.min((window.innerWidth - 40) / 1320, (window.innerHeight - 120) / 880);
       el.style.transform = `translate(-50%,-50%) scale(${Math.max(s, 0.1)})`;
     }
     fit();
