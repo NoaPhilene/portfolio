@@ -22,10 +22,10 @@
 }
 @keyframes turnPrev {
   0% {
-    transform: rotateY(114deg);
+    transform: rotateY(80deg);
     opacity: 0;
   }
-  55% {
+  30% {
     opacity: 1;
   }
   100% {
@@ -35,10 +35,10 @@
 }
 @keyframes turnBack {
   0% {
-    transform: rotateY(-114deg);
+    transform: rotateY(-80deg);
     opacity: 0;
   }
-  55% {
+  30% {
     opacity: 1;
   }
   100% {
