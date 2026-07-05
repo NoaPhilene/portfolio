@@ -1,0 +1,5 @@
+# Uploaded files are user-supplied images only — make sure this folder can
+# never execute PHP even if something slips past the mime-type check.
+php_flag engine off
+AddHandler cgi-script .php .phtml .php3 .php4 .php5 .php7
+Options -ExecCGI -Indexes

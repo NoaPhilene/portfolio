@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import './desktop.css';
 import { SpreadRow, LEFT_BG, RIGHT_BG } from './Spreads.jsx';
-import { STRINGS } from '../data/strings.js';
-import { PROJECTS } from '../data/projects.js';
 import { WaveField } from '../components/WaveBackdrop.jsx';
 import { ArrowLeftIcon, ArrowRightIcon, CloseIcon } from '../components/icons.jsx';
 import { GOLD } from '../data/theme.js';
+import { useAuth } from '../auth/AuthContext.jsx';
+import Editable from '../components/Editable.jsx';
 
 const archivo = "'Archivo',sans-serif";
 const archivoBlack = "'Archivo Black',sans-serif";
@@ -29,7 +29,13 @@ const langBtnStyle = (active) => ({
   transition: 'all .2s ease',
 });
 
-export default function DesktopMagazine() {
+export default function DesktopMagazine({ content }) {
+  const {
+    STRINGS, PROJECTS, shared, siteImages,
+    updateString, updateShared, updateSiteImage,
+    createProject, updateProject, deleteProject, addProjectImage, removeProjectImage,
+  } = content;
+  const { loggedIn } = useAuth();
   const [i, setI] = useState(0);
   const [lang, setLang] = useState('en');
   const [proj, setProj] = useState(0);
@@ -99,12 +105,14 @@ export default function DesktopMagazine() {
   const hasLink = !!(curProj.url && curProj.url.trim());
   const cleanUrl = hasLink ? curProj.url.replace(/^https?:\/\//, '').replace(/\/$/, '') : '';
   const sel = {
+    id: curProj.id,
     name: curProj.name,
     year: curProj.year,
     cat: curProj.cat[lang],
     desc: curProj.desc[lang],
     numName: 'No_' + String(proj + 1).padStart(2, '0'),
     tags: curProj.tags,
+    images: curProj.images || [],
     hasLink,
     noLink: !hasLink,
     url: cleanUrl,
@@ -112,6 +120,7 @@ export default function DesktopMagazine() {
     offline: t.wkOffline,
   };
   const projList = PROJECTS.map((p, idx) => ({
+    id: p.id,
     onClick: () => setProj(idx),
     num: String(idx + 1).padStart(2, '0'),
     name: p.name,
@@ -120,6 +129,7 @@ export default function DesktopMagazine() {
     active: idx === proj,
   }));
   const gridList = PROJECTS.map((p, idx) => ({
+    id: p.id,
     onClick: () => {
       setProj(idx);
       setPickerOpen(false);
@@ -131,11 +141,27 @@ export default function DesktopMagazine() {
     active: idx === proj,
   }));
 
+  const handleAddProject = async () => {
+    await createProject();
+    setProj(PROJECTS.length);
+  };
+
   const ctx = {
     t,
     lang,
     sel,
     projList,
+    shared,
+    siteImages,
+    loggedIn,
+    updateString,
+    updateShared,
+    updateSiteImage,
+    updateProject,
+    deleteProject,
+    addProjectImage,
+    removeProjectImage,
+    onAddProject: handleAddProject,
     openPicker: () => setPickerOpen(true),
     go: (n) => goToRef.current(n),
   };
@@ -276,14 +302,18 @@ export default function DesktopMagazine() {
               <WaveField w={1320} h={880} variant="picker" colorA="#244e74" opacityA={0.5} colorB="#0f2236" />
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <div>
-                  <div style={{ fontFamily: archivo, fontSize: 12, letterSpacing: '.28em', textTransform: 'uppercase', fontWeight: 600, color: GOLD }}>{t.wkKicker}</div>
-                  <div style={{ marginTop: 12, fontFamily: archivoBlack, fontSize: 64, lineHeight: 0.9, color: '#f1ebdf' }}>{t.wkPickTitle}</div>
+                  <div style={{ fontFamily: archivo, fontSize: 12, letterSpacing: '.28em', textTransform: 'uppercase', fontWeight: 600, color: GOLD }}>
+                    <Editable value={t.wkKicker} onSave={(v) => updateString('wkKicker', lang, v)} />
+                  </div>
+                  <div style={{ marginTop: 12, fontFamily: archivoBlack, fontSize: 64, lineHeight: 0.9, color: '#f1ebdf' }}>
+                    <Editable value={t.wkPickTitle} onSave={(v) => updateString('wkPickTitle', lang, v)} />
+                  </div>
                 </div>
                 <button
                   onClick={() => setPickerOpen(false)}
                   style={{ display: 'flex', alignItems: 'center', gap: 10, background: 'rgba(255,255,255,.06)', border: '1px solid rgba(236,229,214,.24)', color: '#f1ebdf', borderRadius: 40, padding: '12px 22px', cursor: 'pointer', fontFamily: archivo, fontSize: 12, letterSpacing: '.16em', textTransform: 'uppercase', fontWeight: 600 }}
                 >
-                  {t.wkPickClose}
+                  <Editable value={t.wkPickClose} onSave={(v) => updateString('wkPickClose', lang, v)} />
                   <CloseIcon />
                 </button>
               </div>
@@ -334,7 +364,7 @@ export default function DesktopMagazine() {
 
       <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, height: 58, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 42px', zIndex: 60 }}>
         <span style={{ fontFamily: archivo, fontSize: 12, letterSpacing: '.2em', textTransform: 'uppercase', color: '#5f5849' }}>
-          P. {L}–{R} · {t.titles[i]}
+          P. {L}–{R} · <Editable value={t.titles[i]} onSave={(v) => updateString(`titles.${i}`, lang, v)} />
         </span>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           {Array.from({ length: N }, (_, d) => (

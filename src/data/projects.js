@@ -3,17 +3,22 @@
 // a category/description/role in both languages, and a tags list.
 export const PROJECTS = [
   {
-    id: 'aurora',
-    name: 'Aurora',
-    year: '2025',
-    url: 'aurora.shop',
-    cat: { en: 'E-commerce Platform', nl: 'E-commerceplatform' },
-    role: { en: 'Design & Front-end', nl: 'Ontwerp & Front-end' },
+    id: 'happy-herbivore',
+    name: 'Happy Herbivore',
+    year: '2026',
+    url: 'u240073.gluwebsite.nl/kiosk',
+    cat: { en: 'Self-Service Kiosk', nl: 'Self-service kiosk' },
+    role: { en: 'Front-end Development', nl: 'Front-end-ontwikkeling' },
     desc: {
-      en: 'A headless storefront with a custom design system, built for speed. Sub-second navigation, fluid product pages and a checkout flow that genuinely converts.',
-      nl: "Een headless webshop met een eigen design system, gebouwd voor snelheid. Navigatie binnen een seconde, vloeiende productpagina's en een checkout die echt converteert.",
+      en: "A fully working self-service kiosk prototype for the restaurant Happy Herbivore. The kiosk guides customers independently through the entire ordering process — from picking products to a simulated payment — styled to match the restaurant's brand.",
+      nl: 'Een volledig werkend prototype van een self-service kiosk voor restaurant Happy Herbivore. De kiosk begeleidt klanten zelfstandig door het hele bestelproces — van het kiezen van producten tot een gesimuleerde betaling — in de huisstijl van het restaurant.',
     },
-    tags: ['Next.js', 'TypeScript', 'Stripe'],
+    tags: ['React'],
+    images: [
+      '/projects/happy-herbivore/breakfast-menu.png',
+      '/projects/happy-herbivore/full-menu.png',
+      '/projects/happy-herbivore/item-detail.png',
+    ],
   },
   {
     id: 'lumen',

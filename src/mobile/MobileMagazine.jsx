@@ -1,10 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import './mobile.css';
 import { MobilePage } from './Pages.jsx';
-import { STRINGS, pageKickers } from '../data/strings.js';
-import { PROJECTS } from '../data/projects.js';
+import { pageKickers } from '../data/strings.js';
 import { ArrowLeftIcon, ArrowRightIcon } from '../components/icons.jsx';
 import { PAGE_BG, PAGE_FG, PAGE_ACCENT, PAGE_ALIGN } from '../data/theme.js';
+import { useAuth } from '../auth/AuthContext.jsx';
+import Editable from '../components/Editable.jsx';
+
+const KICKER_KEYS = ['coverKicker', 'ctKicker', 'abKicker', 'skKicker', 'wkKicker', 'coKicker'];
 
 const archivo = "'Archivo',sans-serif";
 
@@ -25,7 +28,13 @@ const langBtnStyle = (active) => ({
   transition: 'all .2s ease',
 });
 
-export default function MobileMagazine() {
+export default function MobileMagazine({ content }) {
+  const {
+    STRINGS, PROJECTS, shared, siteImages,
+    updateString, updateShared, updateSiteImage,
+    createProject, updateProject, deleteProject, addProjectImage, removeProjectImage,
+  } = content;
+  const { loggedIn } = useAuth();
   const [i, setI] = useState(0);
   const [lang, setLang] = useState('en');
   const [proj, setProj] = useState(0);
@@ -66,11 +75,13 @@ export default function MobileMagazine() {
   const hasLink = !!(curProj.url && curProj.url.trim());
   const cleanUrl = hasLink ? curProj.url.replace(/^https?:\/\//, '').replace(/\/$/, '') : '';
   const sel = {
+    id: curProj.id,
     name: curProj.name,
     year: curProj.year,
     cat: curProj.cat[lang],
     desc: curProj.desc[lang],
     tags: curProj.tags,
+    images: curProj.images || [],
     hasLink,
     noLink: !hasLink,
     url: cleanUrl,
@@ -78,12 +89,35 @@ export default function MobileMagazine() {
     offline: t.wkOffline,
   };
   const projList = PROJECTS.map((p, idx) => ({
+    id: p.id,
     onClick: () => selectProject(idx),
     num: String(idx + 1).padStart(2, '0'),
     active: idx === proj,
   }));
 
-  const ctx = { t, lang, sel, projList, go: goTo };
+  const handleAddProject = async () => {
+    await createProject();
+    selectProject(PROJECTS.length);
+  };
+
+  const ctx = {
+    t,
+    lang,
+    sel,
+    projList,
+    shared,
+    siteImages,
+    loggedIn,
+    updateString,
+    updateShared,
+    updateSiteImage,
+    updateProject,
+    deleteProject,
+    addProjectImage,
+    removeProjectImage,
+    onAddProject: handleAddProject,
+    go: goTo,
+  };
 
   const page = {
     bg: PAGE_BG[i],
@@ -124,7 +158,9 @@ export default function MobileMagazine() {
               color: page.fg,
             }}
           >
-            <div style={{ fontFamily: archivo, fontSize: 10.5, letterSpacing: '.26em', textTransform: 'uppercase', fontWeight: 700, color: page.accent }}>{page.kicker}</div>
+            <div style={{ fontFamily: archivo, fontSize: 10.5, letterSpacing: '.26em', textTransform: 'uppercase', fontWeight: 700, color: page.accent }}>
+              <Editable value={page.kicker} onSave={(v) => updateString(KICKER_KEYS[i], lang, v)} />
+            </div>
 
             <MobilePage index={i} ctx={ctx} />
 
