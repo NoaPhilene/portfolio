@@ -71,7 +71,9 @@ if ($action === 'addImage' && $method === 'POST') {
 
     $pdo->prepare('INSERT INTO project_images (project_id, url, sort_order) VALUES (?, ?, ?)')
         ->execute([$id, $url, $sortOrder]);
-    json_out(fetch_projects($pdo, $id)[0] ?? ['error' => 'Not found'], 404);
+    $projects = fetch_projects($pdo, $id);
+    if (!$projects) json_out(['error' => 'Not found'], 404);
+    json_out($projects[0]);
 }
 
 if ($action === 'removeImage' && $method === 'POST') {
@@ -81,7 +83,21 @@ if ($action === 'removeImage' && $method === 'POST') {
     $url = trim($body['url'] ?? '');
     $pdo->prepare('DELETE FROM project_images WHERE project_id = ? AND url = ?')->execute([$id, $url]);
     $projects = fetch_projects($pdo, $id);
-    json_out($projects[0] ?? ['error' => 'Not found'], 404);
+    if (!$projects) json_out(['error' => 'Not found'], 404);
+    json_out($projects[0]);
+}
+
+if ($action === 'reorder' && $method === 'POST') {
+    require_login();
+    $body = read_json_body();
+    $ids = $body['ids'] ?? [];
+    if (!is_array($ids) || !$ids) json_out(['error' => 'Missing ids'], 400);
+
+    $stmt = $pdo->prepare('UPDATE projects SET sort_order = ? WHERE id = ?');
+    foreach (array_values($ids) as $index => $pid) {
+        $stmt->execute([$index, (int) $pid]);
+    }
+    json_out(fetch_projects($pdo));
 }
 
 if ($method === 'POST' && $action === '') {
@@ -147,7 +163,8 @@ if ($method === 'PUT') {
         $pdo->prepare('UPDATE projects SET ' . implode(', ', $fields) . ' WHERE id = ?')->execute($params);
     }
     $projects = fetch_projects($pdo, $id);
-    json_out($projects[0] ?? ['error' => 'Not found'], 404);
+    if (!$projects) json_out(['error' => 'Not found'], 404);
+    json_out($projects[0]);
 }
 
 if ($method === 'DELETE') {

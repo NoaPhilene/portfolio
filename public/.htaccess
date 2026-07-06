@@ -1,0 +1,9 @@
+# SPA fallback for the production build: let real files (assets, the PHP
+# api/) through as-is, but send any other path (like /admin) to index.html
+# so client-side routing still works after a hard refresh or direct link.
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+RewriteRule ^api/ - [L]
+RewriteRule ^ index.html [L]

@@ -3,41 +3,56 @@ import DesktopMagazine from './desktop/DesktopMagazine.jsx';
 import MobileMagazine from './mobile/MobileMagazine.jsx';
 import { AuthProvider, useAuth } from './auth/AuthContext.jsx';
 import { useContent } from './data/useContent.js';
-import LoginModal from './components/LoginModal.jsx';
+import AdminLoginPage from './components/AdminLoginPage.jsx';
 
 const BREAKPOINT = '(max-width: 760px)';
 
-function AccountControl() {
-  const { loggedIn, checking, logout } = useAuth();
-  const [modalOpen, setModalOpen] = useState(false);
+function isAdminPath(path) {
+  return /\/admin\/?$/.test(path);
+}
 
-  if (checking) return null;
+function siteRoot(path) {
+  return path.replace(/\/admin\/?$/, '/') || '/';
+}
 
+function useRoute() {
+  const [path, setPath] = useState(window.location.pathname);
+  useEffect(() => {
+    const onPop = () => setPath(window.location.pathname);
+    window.addEventListener('popstate', onPop);
+    return () => window.removeEventListener('popstate', onPop);
+  }, []);
+  const navigate = (to) => {
+    window.history.pushState({}, '', to);
+    setPath(to);
+  };
+  return [path, navigate];
+}
+
+function LogoutButton() {
+  const { logout } = useAuth();
   return (
-    <>
-      <button
-        onClick={() => (loggedIn ? logout() : setModalOpen(true))}
-        style={{
-          position: 'fixed',
-          left: 14,
-          bottom: 14,
-          zIndex: 90,
-          border: 'none',
-          background: 'rgba(23,49,74,.12)',
-          color: '#17314a',
-          borderRadius: 20,
-          padding: '6px 14px',
-          fontFamily: "'Archivo',sans-serif",
-          fontSize: 11,
-          letterSpacing: '.1em',
-          textTransform: 'uppercase',
-          cursor: 'pointer',
-        }}
-      >
-        {loggedIn ? 'Uitloggen' : 'Log in'}
-      </button>
-      {modalOpen && <LoginModal onClose={() => setModalOpen(false)} />}
-    </>
+    <button
+      onClick={logout}
+      style={{
+        position: 'fixed',
+        left: 14,
+        bottom: 14,
+        zIndex: 90,
+        border: 'none',
+        background: 'rgba(23,49,74,.12)',
+        color: '#17314a',
+        borderRadius: 20,
+        padding: '6px 14px',
+        fontFamily: "'Archivo',sans-serif",
+        fontSize: 11,
+        letterSpacing: '.1em',
+        textTransform: 'uppercase',
+        cursor: 'pointer',
+      }}
+    >
+      Uitloggen
+    </button>
   );
 }
 
@@ -60,8 +75,28 @@ function Magazine() {
 export default function App() {
   return (
     <AuthProvider>
-      <Magazine />
-      <AccountControl />
+      <Root />
     </AuthProvider>
+  );
+}
+
+function Root() {
+  const [path, navigate] = useRoute();
+  const { loggedIn, checking } = useAuth();
+
+  if (isAdminPath(path)) {
+    if (checking) return null;
+    if (loggedIn) {
+      navigate(siteRoot(path));
+      return null;
+    }
+    return <AdminLoginPage onLoggedIn={() => navigate(siteRoot(path))} />;
+  }
+
+  return (
+    <>
+      <Magazine />
+      {loggedIn && <LogoutButton />}
+    </>
   );
 }

@@ -32,12 +32,13 @@ export default function MobileMagazine({ content }) {
   const {
     STRINGS, PROJECTS, shared, siteImages,
     updateString, updateShared, updateSiteImage,
-    createProject, updateProject, deleteProject, addProjectImage, removeProjectImage,
+    createProject, updateProject, moveProject, deleteProject, addProjectImage, removeProjectImage,
   } = content;
   const { loggedIn } = useAuth();
   const [i, setI] = useState(0);
   const [lang, setLang] = useState('en');
   const [proj, setProj] = useState(0);
+  const pendingSelectId = useRef(null);
   const [dir, setDir] = useState('next');
   const [animKey, setAnimKey] = useState(0);
 
@@ -93,12 +94,26 @@ export default function MobileMagazine({ content }) {
     onClick: () => selectProject(idx),
     num: String(idx + 1).padStart(2, '0'),
     active: idx === proj,
+    isFirst: idx === 0,
+    isLast: idx === PROJECTS.length - 1,
   }));
 
   const handleAddProject = async () => {
     await createProject();
     selectProject(PROJECTS.length);
   };
+
+  const handleMoveProject = (id, direction) => {
+    pendingSelectId.current = id;
+    moveProject(id, direction);
+  };
+
+  useEffect(() => {
+    if (pendingSelectId.current == null) return;
+    const idx = PROJECTS.findIndex((p) => p.id === pendingSelectId.current);
+    if (idx !== -1) setProj(idx);
+    pendingSelectId.current = null;
+  }, [PROJECTS]);
 
   const ctx = {
     t,
@@ -116,6 +131,7 @@ export default function MobileMagazine({ content }) {
     addProjectImage,
     removeProjectImage,
     onAddProject: handleAddProject,
+    onMoveProject: handleMoveProject,
     go: goTo,
   };
 

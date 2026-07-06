@@ -33,12 +33,13 @@ export default function DesktopMagazine({ content }) {
   const {
     STRINGS, PROJECTS, shared, siteImages,
     updateString, updateShared, updateSiteImage,
-    createProject, updateProject, deleteProject, addProjectImage, removeProjectImage,
+    createProject, updateProject, moveProject, deleteProject, addProjectImage, removeProjectImage,
   } = content;
   const { loggedIn } = useAuth();
   const [i, setI] = useState(0);
   const [lang, setLang] = useState('en');
   const [proj, setProj] = useState(0);
+  const pendingSelectId = useRef(null);
   const [pickerOpen, setPickerOpen] = useState(false);
   const [flip, setFlip] = useState(null); // { dir: 'next'|'prev', from, to }
   const stageRef = useRef(null);
@@ -127,6 +128,8 @@ export default function DesktopMagazine({ content }) {
     cat: p.cat[lang],
     year: p.year,
     active: idx === proj,
+    isFirst: idx === 0,
+    isLast: idx === PROJECTS.length - 1,
   }));
   const gridList = PROJECTS.map((p, idx) => ({
     id: p.id,
@@ -146,6 +149,18 @@ export default function DesktopMagazine({ content }) {
     setProj(PROJECTS.length);
   };
 
+  const handleMoveProject = (id, direction) => {
+    pendingSelectId.current = id;
+    moveProject(id, direction);
+  };
+
+  useEffect(() => {
+    if (pendingSelectId.current == null) return;
+    const idx = PROJECTS.findIndex((p) => p.id === pendingSelectId.current);
+    if (idx !== -1) setProj(idx);
+    pendingSelectId.current = null;
+  }, [PROJECTS]);
+
   const ctx = {
     t,
     lang,
@@ -162,6 +177,7 @@ export default function DesktopMagazine({ content }) {
     addProjectImage,
     removeProjectImage,
     onAddProject: handleAddProject,
+    onMoveProject: handleMoveProject,
     openPicker: () => setPickerOpen(true),
     go: (n) => goToRef.current(n),
   };

@@ -3,7 +3,7 @@ import Editable from '../../components/Editable.jsx';
 import { GOLD } from '../../data/theme.js';
 import { archivo, archivoBlack, spectral } from './shared.jsx';
 
-export default function WorkPage({ t, lang, sel, projList, loggedIn, updateProject, deleteProject, addProjectImage, removeProjectImage, onAddProject }) {
+export default function WorkPage({ t, lang, sel, projList, loggedIn, updateProject, deleteProject, addProjectImage, removeProjectImage, onAddProject, onMoveProject }) {
   const updateTag = (idx, value) => updateProject(sel.id, { tags: sel.tags.map((tg, i) => (i === idx ? value : tg)) });
   const removeTag = (idx) => updateProject(sel.id, { tags: sel.tags.filter((_, i) => i !== idx) });
   const addTag = () => updateProject(sel.id, { tags: [...sel.tags, 'Nieuw'] });
@@ -107,6 +107,26 @@ export default function WorkPage({ t, lang, sel, projList, loggedIn, updateProje
               >
                 {p.num}
               </div>
+              {loggedIn && (
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 2 }}>
+                  <button
+                    onClick={(e) => { e.stopPropagation(); onMoveProject(p.id, 'left'); }}
+                    disabled={p.isFirst}
+                    title="Naar links"
+                    style={{ border: 'none', background: 'transparent', color: p.isFirst ? 'rgba(31,29,26,.2)' : '#8a7f6a', fontSize: 11, cursor: p.isFirst ? 'default' : 'pointer', padding: 0 }}
+                  >
+                    ‹
+                  </button>
+                  <button
+                    onClick={(e) => { e.stopPropagation(); onMoveProject(p.id, 'right'); }}
+                    disabled={p.isLast}
+                    title="Naar rechts"
+                    style={{ border: 'none', background: 'transparent', color: p.isLast ? 'rgba(31,29,26,.2)' : '#8a7f6a', fontSize: 11, cursor: p.isLast ? 'default' : 'pointer', padding: 0 }}
+                  >
+                    ›
+                  </button>
+                </div>
+              )}
             </div>
           ))}
           {loggedIn && (

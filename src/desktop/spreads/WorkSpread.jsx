@@ -5,7 +5,7 @@ import { ExternalLinkIcon } from '../../components/icons.jsx';
 import { GOLD } from '../../data/theme.js';
 import { Page, PageNum, Kicker, archivo, archivoBlack, spectral } from './shared.jsx';
 
-export default function WorkSpread({ t, lang, sel, projList, loggedIn, updateString, updateProject, deleteProject, addProjectImage, removeProjectImage, onAddProject, openPicker }) {
+export default function WorkSpread({ t, lang, sel, projList, loggedIn, updateString, updateProject, deleteProject, addProjectImage, removeProjectImage, onAddProject, onMoveProject, openPicker }) {
   const edit = (key) => (v) => updateString(key, lang, v);
 
   const updateTag = (idx, value) => updateProject(sel.id, { tags: sel.tags.map((tg, i) => (i === idx ? value : tg)) });
@@ -138,9 +138,31 @@ export default function WorkSpread({ t, lang, sel, projList, loggedIn, updateStr
                   }}
                 >
                   <div style={{ fontFamily: archivoBlack, fontSize: 17, lineHeight: 1, color: GOLD }}>{p.num}</div>
-                  <div style={{ fontFamily: archivoBlack, fontSize: 16, color: p.active ? '#f1ebdf' : '#1f1d1a' }}>{p.name}</div>
+                  <div style={{ fontFamily: archivoBlack, fontSize: 16, color: p.active ? '#f1ebdf' : '#1f1d1a' }}>
+                    <Editable value={p.name} onSave={(v) => updateProject(p.id, { name: v })} />
+                  </div>
                   <div style={{ fontFamily: spectral, fontSize: 12, lineHeight: 1.3, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: p.active ? 'rgba(236,229,214,.82)' : '#6b6457' }}>{p.cat}</div>
                 </div>
+                {loggedIn && (
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 4 }}>
+                    <button
+                      onClick={(e) => { e.stopPropagation(); onMoveProject(p.id, 'left'); }}
+                      disabled={p.isFirst}
+                      title="Naar links verplaatsen"
+                      style={{ border: 'none', background: 'transparent', color: p.isFirst ? 'rgba(31,29,26,.2)' : '#8a7f6a', fontSize: 16, cursor: p.isFirst ? 'default' : 'pointer', padding: '0 4px' }}
+                    >
+                      ‹
+                    </button>
+                    <button
+                      onClick={(e) => { e.stopPropagation(); onMoveProject(p.id, 'right'); }}
+                      disabled={p.isLast}
+                      title="Naar rechts verplaatsen"
+                      style={{ border: 'none', background: 'transparent', color: p.isLast ? 'rgba(31,29,26,.2)' : '#8a7f6a', fontSize: 16, cursor: p.isLast ? 'default' : 'pointer', padding: '0 4px' }}
+                    >
+                      ›
+                    </button>
+                  </div>
+                )}
               </div>
             ))}
             {loggedIn && (

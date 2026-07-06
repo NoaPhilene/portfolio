@@ -29,6 +29,8 @@ export const api = {
     request(`projects.php?action=addImage&id=${id}`, { method: 'POST', body: JSON.stringify({ url }) }),
   removeProjectImage: (id, url) =>
     request(`projects.php?action=removeImage&id=${id}`, { method: 'POST', body: JSON.stringify({ url }) }),
+  reorderProjects: (ids) =>
+    request('projects.php?action=reorder', { method: 'POST', body: JSON.stringify({ ids }) }),
 
   getSiteImages: () => request('site-images.php'),
   setSiteImage: (key, url) => request('site-images.php', { method: 'POST', body: JSON.stringify({ key, url }) }),
